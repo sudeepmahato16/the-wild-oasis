@@ -1,0 +1,106 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id                String    @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String    @db.ObjectId
+  providerType      String
+  providerId        String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        DateTime?
+  token_type        String?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  user              User      @relation(fields: [userId], references: [id])
+
+  @@unique([providerId, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId       String   @db.ObjectId
+  expires      DateTime
+  sessionToken String   @unique
+  user         User     @relation(fields: [userId], references: [id])
+}
+
+model User {
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  password      String
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  accounts      Account[]
+  sessions      Session[]
+}
+
+model Cabin {
+  id           String     @id @default(auto()) @map("_id") @db.ObjectId
+  name         String
+  maxCapacity  Int
+  regularPrice Int
+  discount     Int
+  description  String
+  image        String
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  Bookings     Bookings[]
+}
+
+model Guest {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  fullName    String
+  email       String
+  nationality String
+  country     String
+  nationalID  String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  Bookings     Bookings[]
+}
+
+model Settings {
+  id                  String   @id @default(auto()) @map("_id") @db.ObjectId
+  minBookingLength    Int
+  maxBookingLength    Int
+  maxGuestsPerBooking Int
+  breakfastPrice      Float
+  createdAt           DateTime @default(now())
+}
+
+model Bookings {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  startDate    DateTime
+  endDate      DateTime
+  numNights    Int
+  numGuests    Int
+  cabinPrice   Float
+  extrasPrice  Float
+  totalPrice   Float
+  status       String
+  hasBreakfast Boolean
+  isPaid       Boolean
+  observations String?
+
+  cabinId String @db.ObjectId
+  cabin   Cabin  @relation(fields: [cabinId], references: [id])
+
+  guestId String @db.ObjectId
+  guest   Guest  @relation(fields: [guestId], references: [id])
+
+  createdAt DateTime @default(now())
+}
