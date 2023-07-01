@@ -11,3 +11,15 @@
 .nav-link:hover, .nav-link.active{
   @apply text-gray-800 bg-gray-50 rounded-sm
 }
+
+.table{
+  border: 1px solid rgb(229 231 235);
+  border-radius: 7px;
+}
+
+.table-row{
+  display: grid;
+  grid-template-columns: 0.6fr 1.8fr 2.2fr 1fr 1fr 1fr;
+  column-gap: 24px;
+  align-items: center;
+}

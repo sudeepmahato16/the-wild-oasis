@@ -8,10 +8,14 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
-    <div className="container min-h-screen grid grid-cols-[260px_1fr] grid-rows-[auto_1fr]">
+    <div className="min-h-screen grid grid-cols-[250px_1fr] grid-rows-[auto_1fr]">
       <Header />
       <Sidebar />
-      <main className="flex flex-col gap-8 bg-red-200">{children}</main>
+      <main className=" bg-gray-50 pt-8 px-10 pb-12 ">
+        <div className="container flex flex-col gap-6">
+        {children}
+          </div>
+      </main>
     </div>
   );
 };
