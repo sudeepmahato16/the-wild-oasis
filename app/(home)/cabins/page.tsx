@@ -1,8 +1,12 @@
-import React from "react";
-import CabinTable from "@/features/cabins/CabinTable";
+"use client";
+import React, { useState } from "react";
 
+import CabinTable from "@/features/cabins/CabinTable";
+import CreateCabin from "@/features/cabins/CreateCabinForm";
+import Button from "@/components/Button";
 
 const Cabins = () => {
+  const [showForm, setShowForm] = useState(false);
   return (
     <>
       <div className="flex justify-between items-center">
@@ -12,6 +16,10 @@ const Cabins = () => {
 
       <div className="flex flex-col gap-4">
         <CabinTable />
+        <Button className="max-w-fit" onClick={() => setShowForm(true)}>
+          Add new cabin
+        </Button>
+        {showForm && <CreateCabin />}
       </div>
     </>
   );

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Sono:wght@400;500;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Sono:wght@400;500;600&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -8,18 +8,60 @@
   @apply max-w-[1440px] mx-auto my-0;
 }
 
-.nav-link:hover, .nav-link.active{
-  @apply text-gray-800 bg-gray-50 rounded-sm
+.nav-link:hover,
+.nav-link.active {
+  @apply text-gray-800 bg-gray-50 rounded-sm;
 }
 
-.table{
+.table {
   border: 1px solid rgb(229 231 235);
   border-radius: 7px;
 }
 
-.table-row{
+.table-row {
   display: grid;
   grid-template-columns: 0.6fr 1.8fr 2.2fr 1fr 1fr 1fr;
   column-gap: 24px;
   align-items: center;
+}
+
+.btn {
+  @apply border-none rounded-[5px] shadow-sm transition-all duration-300;
+}
+
+.btn.small {
+  @apply text-[12px] py-1 px-3 uppercase font-semibold text-center;
+}
+
+.btn.medium {
+  @apply text-[14px] py-3 px-4 font-medium;
+}
+
+.btn.large {
+  @apply text-[16px] py-3 px-6 font-medium;
+}
+
+.btn.primary {
+  @apply text-[#eef2ff] bg-indigo-600 hover:bg-indigo-700;
+}
+
+.btn.secondary {
+  @apply border border-gray-200 bg-white hover:bg-gray-50;
+}
+
+.btn.danger {
+  @apply text-red-100 bg-red-700 hover:bg-red-800;
+}
+
+.textarea {
+  @apply py-2 px-3 border text-[14px] border-gray-300 rounded-[5px] bg-white shadow-sm w-full h-24 resize-none;
+}
+
+.image-input::file-selector-button {
+  font: inherit;
+  @apply font-medium py-2 px-3 rounded-md mr-3 border-none text-indigo-50 bg-indigo-600 cursor-pointer transition-colors duration-200 ;
+}
+
+.image-input::file-selector-button:hover {
+  @apply bg-indigo-700;
 }

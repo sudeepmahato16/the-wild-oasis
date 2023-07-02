@@ -31,14 +31,16 @@ const CabinRow: React.FC<CabinRowProps> = ({ cabin }) => {
   });
 
   return (
-    <div className="table-row transition-none py-2 px-6 border-b border-grey-100 not-last-child:border-b-0">
-      <Image
+    <div className="table-row transition-none py-2 px-6 border-b border-grey-100 [&:not(:last-child)]:border-b-0">
+
+     <Image
         src={image}
         alt={name}
-        width={54}
-        height={72}
-        className="scale-[1.4] -translate-x-[10px]"
-      />
+        width={75}
+        height={48}
+        className="scale-[1.3] -translate-x-[12px] w-auto h-auto"
+        />
+
       <h4 className="text-[16px] font-sono text-gray-600 font-semibold">
         {name}
       </h4>
