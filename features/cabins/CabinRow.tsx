@@ -1,9 +1,11 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { Cabin } from "@prisma/client";
+
+import CreateCabinForm from "./CreateCabinForm";
 
 import { deleteCabin } from "@/services/apiCabin";
 import { formatCurrency } from "@/utils/helpers";
@@ -13,9 +15,10 @@ interface CabinRowProps {
 }
 
 const CabinRow: React.FC<CabinRowProps> = ({ cabin }) => {
-  const { id, name, maxCapacity, regularPrice, discount, image, description } =
-    cabin;
+  const [showForm, setShowForm] = useState<boolean>(false);
   const queryClient = useQueryClient();
+
+  const { id, name, maxCapacity, regularPrice, discount, image } = cabin;
 
   const { isLoading: isDeleting, mutate: onDelete } = useMutation({
     mutationFn: deleteCabin,
@@ -23,7 +26,7 @@ const CabinRow: React.FC<CabinRowProps> = ({ cabin }) => {
       queryClient.invalidateQueries({
         queryKey: ["cabins"],
       });
-      toast.success("Cabin successfully deleted")
+      toast.success("Cabin successfully deleted");
     },
     onError: (err: any) => {
       toast.error(err.message);
@@ -32,14 +35,13 @@ const CabinRow: React.FC<CabinRowProps> = ({ cabin }) => {
 
   return (
     <div className="table-row transition-none py-2 px-6 border-b border-grey-100 [&:not(:last-child)]:border-b-0">
-
-     <Image
+      <Image
         src={image}
         alt={name}
         width={75}
         height={48}
         className="scale-[1.3] -translate-x-[12px] w-auto h-auto"
-        />
+      />
 
       <h4 className="text-[16px] font-sono text-gray-600 font-semibold">
         {name}
@@ -58,9 +60,24 @@ const CabinRow: React.FC<CabinRowProps> = ({ cabin }) => {
         <span>&mdash;</span>
       )}
 
-      <button type="button" disabled={isDeleting} onClick={() => onDelete(id)}>
-        Delete
-      </button>
+      <div className="flex flex-row items-center gap-2">
+        <button
+          type="button"
+          disabled={isDeleting}
+          onClick={() => setShowForm((prev) => !prev)}
+        >
+          Edit
+        </button>
+        <button
+          type="button"
+          disabled={isDeleting}
+          onClick={() => onDelete(id)}
+        >
+          Delete
+        </button>
+      </div>
+
+      {showForm && <CreateCabinForm cabin={cabin}/>}
     </div>
   );
 };

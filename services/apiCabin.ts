@@ -1,5 +1,5 @@
-import { Cabin } from "@prisma/client";
 import axios from "axios";
+import { uploadImage } from "./uploadImage";
 
 export const getCabins = async () => {
   try {
@@ -19,7 +19,8 @@ export const deleteCabin = async (id: string) => {
   }
 };
 
-export const createCabin = async ({
+export const createEditCabin = async ({
+  id,
   description,
   discount,
   image,
@@ -27,31 +28,35 @@ export const createCabin = async ({
   name,
   regularPrice,
 }: {
+  id?: string;
   description: string;
   discount: number;
-  image: File;
+  image: File | string;
   maxCapacity: number;
   name: string;
   regularPrice: number;
 }) => {
   try {
-    const formData = new FormData();
-    formData.append("file", image);
-    formData.append("upload_preset", "the-wild-oasis");
-
-    const {data: {secure_url}} = await axios.post(
-      `https://api.cloudinary.com/v1_1/dzxjgqfli/image/upload`,
-      formData
-    );
-
-    const { data } = await axios.post(`/api/cabin`, {
+    let imageUrl = image;
+    if (typeof image !== "string") {
+      imageUrl = await uploadImage(image);
+    }
+    
+    const payload = {
       description,
-      discount,
-      image: secure_url,
-      maxCapacity,
-      name,
-      regularPrice,
-    });
+        discount: discount * 1,
+        image: imageUrl,
+        maxCapacity: maxCapacity * 1,
+        name,
+        regularPrice: regularPrice * 1,
+    };
+
+    if (!id) {
+      const { data } = await axios.post(`/api/cabin`, payload);
+      return data;
+    }
+
+    const { data } = await axios.patch(`/api/cabin/${id}`, payload);
     return data;
   } catch (error: any) {
     throw new Error(error.message);
