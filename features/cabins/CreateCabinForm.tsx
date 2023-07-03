@@ -1,14 +1,12 @@
 import React from "react";
 import { useForm, FieldValues, SubmitHandler } from "react-hook-form";
-import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { Cabin } from "@prisma/client";
-import { toast } from "react-hot-toast";
 
 import FormRow from "@/components/FormRow";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
 
-import { createEditCabin } from "@/services/apiCabin";
+import { useCreateOrEditCabin } from "./hooks/useCreateOrEditCabin";
 
 interface CreateCabinFormProps {
   cabin?: Cabin;
@@ -16,6 +14,7 @@ interface CreateCabinFormProps {
 
 const CreateCabinForm: React.FC<CreateCabinFormProps> = ({ cabin }) => {
   const isEditSession = Boolean(cabin?.id);
+  const { isWorking, createOrEditCabin } = useCreateOrEditCabin(isEditSession);
   const {
     register,
     formState: { errors },
@@ -33,50 +32,12 @@ const CreateCabinForm: React.FC<CreateCabinFormProps> = ({ cabin }) => {
     },
   });
 
-  const queryClient = useQueryClient();
-  const { mutate: createNewCabin, isLoading: isCreating } = useMutation({
-    mutationFn: createEditCabin,
-    onSuccess: () => {
-      toast.success("New cabin successfully created!");
-      queryClient.invalidateQueries({
-        queryKey: ["cabins"],
-      });
-      reset();
-    },
-    onError: (err: any) => {
-      toast.error(err.message);
-    },
-  });
-
-  const { mutate: EditCabin, isLoading: isEditting } = useMutation({
-    mutationFn: createEditCabin,
-    onSuccess: () => {
-      toast.success("Cabin successfully updated!");
-      queryClient.invalidateQueries({
-        queryKey: ["cabins"],
-      });
-      reset();
-    },
-    onError: (err: any) => {
-      toast.error(err.message);
-    },
-  });
-
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     const { description, discount, image, maxCapacity, name, regularPrice } =
       data;
 
-    if (!isEditSession) {
-      createNewCabin({
-        description,
-        discount,
-        image: image[0],
-        maxCapacity,
-        name,
-        regularPrice,
-      });
-    } else {
-      EditCabin({
+    createOrEditCabin(
+      {
         id: cabin?.id,
         description,
         discount,
@@ -84,15 +45,16 @@ const CreateCabinForm: React.FC<CreateCabinFormProps> = ({ cabin }) => {
         maxCapacity,
         name,
         regularPrice,
-      });
-    }
+      },
+      {
+        onSuccess: () => reset(),
+      }
+    );
   };
 
   const onError = (err: any) => {
     console.log(err);
   };
-
-  const isWorking = isCreating || isEditting;
 
   return (
     <form

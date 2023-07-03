@@ -1,14 +1,12 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import toast from "react-hot-toast";
 import { Cabin } from "@prisma/client";
 
 import CreateCabinForm from "./CreateCabinForm";
 
-import { deleteCabin } from "@/services/apiCabin";
 import { formatCurrency } from "@/utils/helpers";
+import { useDeleteCabin } from "./hooks/useDeleteCabin";
 
 interface CabinRowProps {
   cabin: Cabin;
@@ -16,22 +14,8 @@ interface CabinRowProps {
 
 const CabinRow: React.FC<CabinRowProps> = ({ cabin }) => {
   const [showForm, setShowForm] = useState<boolean>(false);
-  const queryClient = useQueryClient();
-
+  const { isDeleting, deleteCabin } = useDeleteCabin();
   const { id, name, maxCapacity, regularPrice, discount, image } = cabin;
-
-  const { isLoading: isDeleting, mutate: onDelete } = useMutation({
-    mutationFn: deleteCabin,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["cabins"],
-      });
-      toast.success("Cabin successfully deleted");
-    },
-    onError: (err: any) => {
-      toast.error(err.message);
-    },
-  });
 
   return (
     <div className="table-row transition-none py-2 px-6 border-b border-grey-100 [&:not(:last-child)]:border-b-0">
@@ -71,13 +55,13 @@ const CabinRow: React.FC<CabinRowProps> = ({ cabin }) => {
         <button
           type="button"
           disabled={isDeleting}
-          onClick={() => onDelete(id)}
+          onClick={() => deleteCabin(id)}
         >
           Delete
         </button>
       </div>
 
-      {showForm && <CreateCabinForm cabin={cabin}/>}
+      {showForm && <CreateCabinForm cabin={cabin} />}
     </div>
   );
 };

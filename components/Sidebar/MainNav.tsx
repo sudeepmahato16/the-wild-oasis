@@ -2,7 +2,7 @@
 import React from "react";
 
 import NavLink from "./NavLink";
-import { navLinks } from "@/constants";
+import { navLinks } from "@/utils/constants";
 
 const MainNav = () => {
   return (

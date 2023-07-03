@@ -14,15 +14,11 @@
 }
 
 .table {
-  border: 1px solid rgb(229 231 235);
-  border-radius: 7px;
+  @apply border border-gray-200 rounded-[7px]
 }
 
 .table-row {
-  display: grid;
-  grid-template-columns: 0.6fr 1.8fr 2.2fr 1fr 1fr 1fr;
-  column-gap: 24px;
-  align-items: center;
+  @apply grid grid-cols-[0.6fr_1.8fr_2.2fr_1fr_1fr_1fr] items-center gap-x-6
 }
 
 .btn {

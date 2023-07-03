@@ -1,20 +1,12 @@
 "use client";
 import React from "react";
-import { useQuery } from "@tanstack/react-query";
 import { Cabin } from "@prisma/client";
 
 import CabinRow from "./CabinRow";
-import { getCabins } from "@/services/apiCabin";
+import { useCabins } from "./hooks/useCabins";
 
 const CabinTable = () => {
-  const {
-    isLoading,
-    data: cabins,
-    error,
-  } = useQuery({
-    queryKey: ["cabins"],
-    queryFn: getCabins,
-  });
+  const {isLoading, cabins} = useCabins();
 
   if (isLoading) return <p>loading..</p>;
 
