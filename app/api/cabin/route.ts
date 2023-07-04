@@ -26,11 +26,11 @@ export const POST = async (req: Request) => {
     const cabin = await db.cabin.create({
       data: {
         description,
-        discount: discount * 1,
+        discount,
         image,
-        maxCapacity: maxCapacity * 1,
+        maxCapacity,
         name,
-        regularPrice: regularPrice * 1,
+        regularPrice,
       },
     });
 

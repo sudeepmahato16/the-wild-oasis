@@ -7,6 +7,7 @@ import CreateCabinForm from "./CreateCabinForm";
 
 import { formatCurrency } from "@/utils/helpers";
 import { useDeleteCabin } from "./hooks/useDeleteCabin";
+import { useCreateOrEditCabin } from "./hooks/useCreateOrEditCabin";
 
 interface CabinRowProps {
   cabin: Cabin;
@@ -15,7 +16,20 @@ interface CabinRowProps {
 const CabinRow: React.FC<CabinRowProps> = ({ cabin }) => {
   const [showForm, setShowForm] = useState<boolean>(false);
   const { isDeleting, deleteCabin } = useDeleteCabin();
-  const { id, name, maxCapacity, regularPrice, discount, image } = cabin;
+  const { createOrEditCabin, isWorking } = useCreateOrEditCabin();
+  const { id, name, maxCapacity, regularPrice, discount, image, description } =
+    cabin;
+
+  const handleDuplicate = () => {
+    createOrEditCabin({
+      name: `${name} copy`,
+      maxCapacity,
+      regularPrice,
+      discount,
+      image,
+      description,
+    });
+  };
 
   return (
     <div className="table-row transition-none py-2 px-6 border-b border-grey-100 [&:not(:last-child)]:border-b-0">
@@ -45,11 +59,10 @@ const CabinRow: React.FC<CabinRowProps> = ({ cabin }) => {
       )}
 
       <div className="flex flex-row items-center gap-2">
-        <button
-          type="button"
-          disabled={isDeleting}
-          onClick={() => setShowForm((prev) => !prev)}
-        >
+        <button type="button" onClick={handleDuplicate} disabled={isWorking}>
+          Duplicate
+        </button>
+        <button type="button" onClick={() => setShowForm((prev) => !prev)}>
           Edit
         </button>
         <button
