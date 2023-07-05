@@ -1,20 +1,20 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 import { Cabin } from "@prisma/client";
 
 import CreateCabinForm from "./CreateCabinForm";
+import Modal from "@/components/Modal";
 
-import { formatCurrency } from "@/utils/helpers";
 import { useDeleteCabin } from "./hooks/useDeleteCabin";
 import { useCreateOrEditCabin } from "./hooks/useCreateOrEditCabin";
+import { formatCurrency } from "@/utils/helpers";
 
 interface CabinRowProps {
   cabin: Cabin;
 }
 
 const CabinRow: React.FC<CabinRowProps> = ({ cabin }) => {
-  const [showForm, setShowForm] = useState<boolean>(false);
   const { isDeleting, deleteCabin } = useDeleteCabin();
   const { createOrEditCabin, isWorking } = useCreateOrEditCabin();
   const { id, name, maxCapacity, regularPrice, discount, image, description } =
@@ -62,19 +62,22 @@ const CabinRow: React.FC<CabinRowProps> = ({ cabin }) => {
         <button type="button" onClick={handleDuplicate} disabled={isWorking}>
           Duplicate
         </button>
-        <button type="button" onClick={() => setShowForm((prev) => !prev)}>
-          Edit
-        </button>
-        <button
-          type="button"
-          disabled={isDeleting}
-          onClick={() => deleteCabin(id)}
-        >
-          Delete
-        </button>
+        <Modal>
+          <Modal.Open opens="edit">
+            <button type="button">Edit</button>
+          </Modal.Open>
+          <Modal.Window name="edit">
+            <CreateCabinForm cabin={cabin} />
+          </Modal.Window>
+          <button
+            type="button"
+            disabled={isDeleting}
+            onClick={() => deleteCabin(id)}
+          >
+            Delete
+          </button>
+        </Modal>
       </div>
-
-      {showForm && <CreateCabinForm cabin={cabin} />}
     </div>
   );
 };

@@ -10,9 +10,13 @@ import { useCreateOrEditCabin } from "./hooks/useCreateOrEditCabin";
 
 interface CreateCabinFormProps {
   cabin?: Cabin;
+  onCloseModal?: () => void;
 }
 
-const CreateCabinForm: React.FC<CreateCabinFormProps> = ({ cabin }) => {
+const CreateCabinForm: React.FC<CreateCabinFormProps> = ({
+  cabin,
+  onCloseModal,
+}) => {
   const isEditSession = Boolean(cabin?.id);
   const { isWorking, createOrEditCabin } = useCreateOrEditCabin(isEditSession);
   const {
@@ -26,7 +30,7 @@ const CreateCabinForm: React.FC<CreateCabinFormProps> = ({ cabin }) => {
       name: cabin?.name || "",
       maxCapacity: cabin?.maxCapacity || null,
       regularPrice: cabin?.regularPrice || null,
-      discount: cabin?.discount || 0,
+      discount: cabin?.discount || null,
       description: cabin?.description || "",
       image: cabin?.image || "",
     },
@@ -47,7 +51,10 @@ const CreateCabinForm: React.FC<CreateCabinFormProps> = ({ cabin }) => {
         regularPrice,
       },
       {
-        onSuccess: () => reset(),
+        onSuccess: () => {
+          reset();
+          onCloseModal?.();
+        },
       }
     );
   };
@@ -154,7 +161,11 @@ const CreateCabinForm: React.FC<CreateCabinFormProps> = ({ cabin }) => {
       </FormRow>
 
       <FormRow hasButton>
-        <Button variant="secondary" type="reset" onClick={() => {}}>
+        <Button
+          variant="secondary"
+          type="reset"
+          onClick={() => onCloseModal?.()}
+        >
           Cancel
         </Button>
         <Button disabled={isWorking} type="submit">
