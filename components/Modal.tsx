@@ -50,7 +50,7 @@ const Window: React.FC<WindowProps> = ({ children, name }) => {
         >
           <HiXMark className="w-6 h-6 stroke-gray-500 text-gray-500" />
         </button>
-        {cloneElement(children, { onCloseModal: () => close() })}
+        {cloneElement(children, { onCloseModal: close })}
       </div>
     </div>,
     document.body

@@ -3,8 +3,10 @@ import React from "react";
 import Image from "next/image";
 import { Cabin } from "@prisma/client";
 
-import CreateCabinForm from "./CreateCabinForm";
+import ConfirmDelete from "@/components/ConfirmDelete";
 import Modal from "@/components/Modal";
+import Table from "@/components/Table";
+import CreateCabinForm from "./CreateCabinForm";
 
 import { useDeleteCabin } from "./hooks/useDeleteCabin";
 import { useCreateOrEditCabin } from "./hooks/useCreateOrEditCabin";
@@ -32,7 +34,7 @@ const CabinRow: React.FC<CabinRowProps> = ({ cabin }) => {
   };
 
   return (
-    <div className="table-row transition-none py-2 px-6 border-b border-grey-100 [&:not(:last-child)]:border-b-0">
+    <Table.Row>
       <Image
         src={image}
         alt={name}
@@ -69,16 +71,20 @@ const CabinRow: React.FC<CabinRowProps> = ({ cabin }) => {
           <Modal.Window name="edit">
             <CreateCabinForm cabin={cabin} />
           </Modal.Window>
-          <button
-            type="button"
-            disabled={isDeleting}
-            onClick={() => deleteCabin(id)}
-          >
-            Delete
-          </button>
+
+          <Modal.Open opens="delete">
+            <button type="button">Delete</button>
+          </Modal.Open>
+          <Modal.Window name="delete">
+            <ConfirmDelete
+              disabled={isDeleting}
+              onConfirm={() => deleteCabin(id)}
+              resourceName="cabins"
+            />
+          </Modal.Window>
         </Modal>
       </div>
-    </div>
+    </Table.Row>
   );
 };
 

@@ -2,27 +2,31 @@
 import React from "react";
 import { Cabin } from "@prisma/client";
 
+import Table from "@/components/Table";
 import CabinRow from "./CabinRow";
 import { useCabins } from "./hooks/useCabins";
 
 const CabinTable = () => {
-  const {isLoading, cabins} = useCabins();
+  const { isLoading, cabins } = useCabins();
 
   if (isLoading) return <p>loading..</p>;
 
   return (
-    <div className="table text-[14px] bg-white">
-      <div className="table-row transition-none py-4 px-6 bg-gray-50 border-b  border-gray-200 uppercase font-semibold text-[14px] text-gray-600 ">
+    <Table className="bg-white" columns="0.6fr 1.8fr 2.2fr 1fr 1fr 1fr">
+      <Table.Header>
+        <div role="rowheader"></div>
+        <h4 role="rowheader">Cabin</h4>
+        <h4 role="rowheader">Capacity</h4>
+        <h4 role="rowheader">Price</h4>
+        <h4 role="rowheader">Discount</h4>
         <div></div>
-        <h4>Cabin</h4>
-        <h4>Capacity</h4>
-        <h4>Price</h4>
-        <h4>Discount</h4>
-        <div></div>
-      </div>
+      </Table.Header>
 
-      {cabins.map((cabin: Cabin) => <CabinRow cabin={cabin} key={cabin.id} />)}
-    </div>
+      <Table.Body
+        data={cabins}
+        render={(cabin: Cabin) => <CabinRow cabin={cabin} key={cabin.id} />}
+      />
+    </Table>
   );
 };
 

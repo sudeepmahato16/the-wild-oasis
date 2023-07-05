@@ -14,11 +14,11 @@
 }
 
 .table {
-  @apply border border-gray-200 rounded-[7px]
+  @apply border border-gray-200 rounded-[7px] text-[14px]
 }
 
-.table-row {
-  @apply grid grid-cols-[0.6fr_1.8fr_2.2fr_1fr_1fr_1fr] items-center gap-x-6
+.table-heading{
+  @apply transition-none py-4 px-6 bg-gray-50 border-b  border-gray-200 uppercase font-semibold text-[14px] text-gray-600
 }
 
 .btn {
