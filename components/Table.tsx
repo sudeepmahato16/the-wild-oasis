@@ -42,7 +42,7 @@ const Body: React.FC<BodyProps> = ({ data, render }) => {
         No data to show at the moment
       </p>
     );
-  return <section className="my-1">{data.map(render)}</section>;
+  return <section className="mt-1">{data.map(render)}</section>;
 };
 
 const Row = ({ children }: { children: ReactNode }) => {
@@ -53,7 +53,7 @@ const Row = ({ children }: { children: ReactNode }) => {
     style={{
       gridTemplateColumns: columns
     }}
-      className={`grid items-center gap-x-6 transition-none py-2 px-6 border-b border-grey-100 [&:not(:last-child)]:border-b-0`}
+      className={`grid items-center gap-x-6 transition-none py-2 px-6 border-b border-gray-200 `}
       role="row"
     >
       {children}
@@ -61,7 +61,6 @@ const Row = ({ children }: { children: ReactNode }) => {
   );
 };
 
-const Footer = () => {};
 
 const Table: React.FC<TableProps> & {
   Header: typeof Header;

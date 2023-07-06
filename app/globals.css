@@ -14,11 +14,11 @@
 }
 
 .table {
-  @apply border border-gray-200 rounded-[7px] text-[14px]
+  @apply border border-gray-200 rounded-[7px] text-[14px];
 }
 
-.table-heading{
-  @apply transition-none py-4 px-6 bg-gray-50 border-b  border-gray-200 uppercase font-semibold text-[14px] text-gray-600
+.table-heading {
+  @apply transition-none py-4 px-6 bg-gray-50 border-b  border-gray-200 uppercase font-semibold text-[14px] text-gray-600;
 }
 
 .btn {
@@ -55,9 +55,18 @@
 
 .image-input::file-selector-button {
   font: inherit;
-  @apply font-medium py-2 px-3 rounded-md mr-3 border-none text-indigo-50 bg-indigo-600 cursor-pointer transition-colors duration-200 ;
+  @apply font-medium py-2 px-3 rounded-md mr-3 border-none text-indigo-50 bg-indigo-600 cursor-pointer transition-colors duration-200;
 }
 
 .image-input::file-selector-button:hover {
   @apply bg-indigo-700;
 }
+
+.menu-btn {
+  @apply w-full text-left bg-none border-none py-3 px-6 text-[14px] transition-all duration-200 flex items-center gap-4 hover:bg-gray-50;
+}
+
+.menu-btn svg {
+  @apply w-[16px] h-[16px] stroke-gray-400 transition-all duration-300;
+}
+
