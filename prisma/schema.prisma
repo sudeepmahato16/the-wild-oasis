@@ -58,7 +58,7 @@ model Cabin {
   image        String
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
-  Bookings     Bookings[]
+  Bookings     Booking[]
 }
 
 model Guest {
@@ -70,7 +70,7 @@ model Guest {
   nationalID  String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  Bookings     Bookings[]
+  Bookings     Booking[]
 }
 
 model Settings {
@@ -82,7 +82,7 @@ model Settings {
   createdAt           DateTime @default(now())
 }
 
-model Bookings {
+model Booking {
   id           String   @id @default(auto()) @map("_id") @db.ObjectId
   startDate    DateTime
   endDate      DateTime
@@ -94,7 +94,7 @@ model Bookings {
   status       String
   hasBreakfast Boolean
   isPaid       Boolean
-  observations String?
+  observations String
 
   cabinId String @db.ObjectId
   cabin   Cabin  @relation(fields: [cabinId], references: [id])

@@ -1,9 +1,19 @@
-import React from 'react'
+import React from "react";
+
+import BookingTable from "@/features/bookings/BookingTable";
+import BookingTableOperations from "@/features/bookings/BookingTableOperations";
 
 const Bookings = () => {
   return (
-    <div>Bookings</div>
-  )
-}
+    <>
+      <div className="flex justify-between items-center">
+        <h1 className="text-[24px] font-semibold">All bookings</h1>
+        <BookingTableOperations />
+      </div>
 
-export default Bookings
+      <BookingTable />
+    </>
+  );
+};
+
+export default Bookings;

@@ -18,7 +18,7 @@
 }
 
 .table-heading {
-  @apply transition-none py-4 px-6 bg-gray-50 border-b  border-gray-200 uppercase font-semibold text-[14px] text-gray-600;
+  @apply transition-none py-4 px-6 bg-gray-50 border-b  border-gray-200 uppercase font-semibold text-[13.25px] text-gray-600;
 }
 
 .btn {
@@ -70,3 +70,14 @@
   @apply w-[16px] h-[16px] stroke-gray-400 transition-all duration-300;
 }
 
+.unconfirmed {
+  @apply bg-blue-100 text-blue-700;
+}
+
+.checked-in {
+  @apply bg-green-100 text-green-700;
+}
+
+.checked-out {
+  @apply bg-[#374151] text-[#f3f4f6];
+}

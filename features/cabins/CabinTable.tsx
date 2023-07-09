@@ -15,6 +15,8 @@ const CabinTable = () => {
 
   if (isLoading) return <p>loading..</p>;
 
+  if (!cabins) return <p>No cabins could be found</p>;
+
   let filterCabins: Cabin[];
   if (filterValue === "all") {
     filterCabins = cabins;
@@ -26,11 +28,13 @@ const CabinTable = () => {
     });
   }
 
-  const sortBy = searchParams.get('sortBy') || 'name-asc';
-  const [field, direction] = sortBy.split('-');
-  const modifier = direction === 'asc' ? 1 : -1;
-  
-  const sortedCabins = filterCabins.sort((a: any, b: any) => (a[field] - b[field]) * modifier);
+  const sortBy = searchParams.get("sortBy") || "name-asc";
+  const [field, direction] = sortBy.split("-");
+  const modifier = direction === "asc" ? 1 : -1;
+
+  const sortedCabins = filterCabins.sort(
+    (a: any, b: any) => (a[field] - b[field]) * modifier
+  );
 
   return (
     <Menus>
