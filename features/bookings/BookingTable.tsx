@@ -1,5 +1,7 @@
 'use client'
 import React from "react";
+import { useSearchParams } from 'next/navigation';
+import queryString  from 'query-string';
 
 import Menu from "@/components/Menu";
 import Table from "@/components/Table";
@@ -8,7 +10,9 @@ import BookingRow, { ExtendedBooking } from "./BookingRow";
 import { useBookings } from "./hooks/useBookings";
 
 const BookingTable = () => {
-  const { bookings, isLoading } = useBookings();
+  const params = useSearchParams();
+  const query = queryString.parse(params.toString());
+  const { bookings, isLoading } = useBookings(query);
 
   if (isLoading) return <p>Loading...</p>;
 
