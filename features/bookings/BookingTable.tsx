@@ -5,6 +5,7 @@ import queryString  from 'query-string';
 
 import Menu from "@/components/Menu";
 import Table from "@/components/Table";
+import Pagination from "@/components/Pagination";
 import BookingRow, { ExtendedBooking } from "./BookingRow";
 
 import { useBookings } from "./hooks/useBookings";
@@ -12,7 +13,7 @@ import { useBookings } from "./hooks/useBookings";
 const BookingTable = () => {
   const params = useSearchParams();
   const query = queryString.parse(params.toString());
-  const { bookings, isLoading } = useBookings(query);
+  const { bookings, isLoading, count } = useBookings(query);
 
   if (isLoading) return <p>Loading...</p>;
 
@@ -39,6 +40,10 @@ const BookingTable = () => {
             <BookingRow key={booking.id} booking={booking } />
           )}
         />
+
+        <Table.Footer>
+          <Pagination count={count} />
+        </Table.Footer>
       </Table>
     </Menu>
   );

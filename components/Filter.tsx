@@ -24,7 +24,7 @@ const Filter: React.FC<FilterProps> = ({ options, filterField }) => {
       {options.map((option) => (
         <button
           type="button"
-          className={` border-none rounded-md font-medium text-[13px] py-[2px] px-2 transition-all duration-300 ${
+          className={` border-none rounded-md font-medium text-[13px] py-[4px] px-2 transition-all duration-300 ${
             option.value === currentFilter
               ? "bg-indigo-600 text-indigo-50"
               : "bg-white"

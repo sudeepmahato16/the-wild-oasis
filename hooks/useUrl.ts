@@ -1,12 +1,12 @@
 import queryString from "query-string";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 
-const useUrl = () => {
+export const useUrl = () => {
   const router = useRouter();
   const pathname = usePathname();
   const params = useSearchParams();
 
-  const addQueryToUrl = (field: string, value: string) => {
+  const addQueryToUrl = (field: string, value: string | number) => {
     let query: any = queryString.parse(params.toString());
     if (!query) query = {};
 

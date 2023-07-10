@@ -62,11 +62,18 @@ const Row = ({ children }: { children: ReactNode }) => {
   );
 };
 
+const Footer = ({children}: {children: React.ReactNode}) => {
+  return <footer className="bg-gray-50 flex justify-center p-3 [&:not(has(*))]:hidden">
+    {children}
+  </footer>
+}
+
 
 const Table: React.FC<TableProps> & {
   Header: typeof Header;
   Row: typeof Row;
   Body: typeof Body;
+  Footer: typeof Footer;
 } = ({ columns, children, className }) => {
   return (
     <TableContext.Provider
@@ -82,5 +89,6 @@ const Table: React.FC<TableProps> & {
 Table.Header = Header;
 Table.Row = Row;
 Table.Body = Body;
+Table.Footer = Footer
 
 export default Table;
