@@ -14,6 +14,7 @@ import Menu from "@/components/Menu";
 import Modal from "@/components/Modal";
 import ConfirmDelete from "@/components/ConfirmDelete";
 
+import { useCheckout } from "../check-in-out/hooks/useCheckout";
 import { formatCurrency, formatDistanceFromNow } from "@/utils/helpers";
 
 export type ExtendedBooking = Booking & {
@@ -43,6 +44,7 @@ const BookingRow: FC<BookingRowProps> = ({
   },
 }) => {
   const router = useRouter();
+  const {checkout, isCheckingOut} = useCheckout();
   return (
     <Table.Row>
       <h4 className="text-[16px] font-semibold text-gray-600 font-sono">
@@ -100,8 +102,8 @@ const BookingRow: FC<BookingRowProps> = ({
             {status === "checked-in" && (
               <Menu.Button
                 icon={HiArrowUpOnSquare}
-                // onClick={() => checkout(bookingId)}
-                // disabled={isCheckingOut}
+                onClick={() => checkout(bookingId)}
+                disabled={isCheckingOut}
               >
                 Check out
               </Menu.Button>

@@ -17,7 +17,7 @@ const SortBy: React.FC<SortByProps> = ({ options }) => {
   const currentValue = getValue("sortBy") || options[0].value;
 
   const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    addQueryToUrl("sortBy", e.target.value);
+    addQueryToUrl({sortBy: e.target.value});
   };
 
   return (

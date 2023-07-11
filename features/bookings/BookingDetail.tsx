@@ -1,6 +1,6 @@
-'use client'
+"use client";
 import React from "react";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 
 import BookingDataBox from "./BookingDataBox";
 import Modal from "@/components/Modal";
@@ -9,16 +9,22 @@ import ConfirmDelete from "@/components/ConfirmDelete";
 
 import { useBooking } from "./hooks/useBooking";
 import { useMoveBack } from "@/hooks/useMoveBack";
+import { useCheckout } from "../check-in-out/hooks/useCheckout";
 
 const BookingDetail = () => {
   const { booking, isLoading } = useBooking();
+  const { checkout, isCheckingOut } = useCheckout();
   const moveBack = useMoveBack();
   const router = useRouter();
 
   if (isLoading) {
     return <p>Loading...</p>;
   }
-  const { status, cabin: {name} } = booking;
+  const {
+    status,
+    cabin: { name },
+    id
+  } = booking;
 
   return (
     <>
@@ -32,7 +38,10 @@ const BookingDetail = () => {
           </span>
         </div>
 
-        <button className="text-indigo-600 text-[14px] font-medium text-center transition-all duration-300 bg-none rounded-md hover:text-indigo-700 active:text-indigo-700" onClick={moveBack}>
+        <button
+          className="text-indigo-600 text-[14px] font-medium text-center transition-all duration-300 bg-none rounded-md hover:text-indigo-700 active:text-indigo-700"
+          onClick={moveBack}
+        >
           &larr; Back
         </button>
       </div>
@@ -40,10 +49,16 @@ const BookingDetail = () => {
       <BookingDataBox booking={booking} />
 
       <div className="flex gap-3 justify-end">
-        {status === "unconfirmed" && <Button onClick={() => router.push(`/bookings/check-in/${booking.id}`)}>Check in</Button>}
+        {status === "unconfirmed" && (
+          <Button
+            onClick={() => router.push(`/bookings/check-in/${id}`)}
+          >
+            Check in
+          </Button>
+        )}
 
         {status === "checked-in" && (
-          <Button>
+          <Button disabled={isCheckingOut} onClick={() => checkout(id)}>
             <span> Check out</span>
           </Button>
         )}
@@ -64,7 +79,9 @@ const BookingDetail = () => {
           </Modal.Window>
         </Modal>
 
-        <Button variant="secondary" onClick={moveBack}>Back</Button>
+        <Button variant="secondary" onClick={moveBack}>
+          Back
+        </Button>
       </div>
     </>
   );

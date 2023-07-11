@@ -12,11 +12,15 @@ interface FilterProps {
 }
 
 const Filter: React.FC<FilterProps> = ({ options, filterField }) => {
-  const {addQueryToUrl, getValue} = useUrl();
+  const { addQueryToUrl, getValue } = useUrl();
   const currentFilter = getValue(filterField) || options[0].value;
 
   const handleClick = (value: string) => {
-    addQueryToUrl(filterField, value);
+    if (getValue("page")) {
+      addQueryToUrl({ [filterField]: value, page: 1 });
+    } else {
+      addQueryToUrl({ [filterField]: value });
+    }
   };
 
   return (

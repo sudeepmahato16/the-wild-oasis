@@ -6,11 +6,11 @@ export const useUrl = () => {
   const pathname = usePathname();
   const params = useSearchParams();
 
-  const addQueryToUrl = (field: string, value: string | number) => {
+  const addQueryToUrl = (newQuery: {}) => {
     let query: any = queryString.parse(params.toString());
     if (!query) query = {};
 
-    query[field] = value;
+    query = { ...query, ...newQuery };
 
     const url = queryString.stringifyUrl({
       url: pathname,
