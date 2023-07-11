@@ -32,3 +32,12 @@ export const updateBooking = async (id: string, payload: {}) => {
     throw new Error(error.message);
   }
 }
+
+export const deleteBooking = async (id: string) => {
+  try {
+    const { data } = await axios.delete(`/api/booking/${id}`);
+    return data;
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+};

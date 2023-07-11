@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 import { isToday, format } from "date-fns";
 import {
   HiArrowDownOnSquare,
@@ -16,6 +16,7 @@ import ConfirmDelete from "@/components/ConfirmDelete";
 
 import { useCheckout } from "../check-in-out/hooks/useCheckout";
 import { formatCurrency, formatDistanceFromNow } from "@/utils/helpers";
+import { useDeleteBooking } from "./hooks/useDeleteBooking";
 
 export type ExtendedBooking = Booking & {
   guest: {
@@ -44,7 +45,8 @@ const BookingRow: FC<BookingRowProps> = ({
   },
 }) => {
   const router = useRouter();
-  const {checkout, isCheckingOut} = useCheckout();
+  const { checkout, isCheckingOut } = useCheckout();
+  const { isDeleting, deleteBooking } = useDeleteBooking();
   return (
     <Table.Row>
       <h4 className="text-[16px] font-semibold text-gray-600 font-sono">
@@ -118,10 +120,8 @@ const BookingRow: FC<BookingRowProps> = ({
         <Modal.Window name="delete">
           <ConfirmDelete
             resourceName="booking"
-            // disabled={isDeleting}
-            // onConfirm={() => deleteBooking(bookingId)}
-            disabled={false}
-            onConfirm={() => {}}
+            disabled={isDeleting}
+            onConfirm={() => deleteBooking(bookingId)}
           />
         </Modal.Window>
       </Modal>

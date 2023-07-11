@@ -10,10 +10,12 @@ import ConfirmDelete from "@/components/ConfirmDelete";
 import { useBooking } from "./hooks/useBooking";
 import { useMoveBack } from "@/hooks/useMoveBack";
 import { useCheckout } from "../check-in-out/hooks/useCheckout";
+import { useDeleteBooking } from "./hooks/useDeleteBooking";
 
 const BookingDetail = () => {
   const { booking, isLoading } = useBooking();
   const { checkout, isCheckingOut } = useCheckout();
+  const {isDeleting, deleteBooking} = useDeleteBooking();
   const moveBack = useMoveBack();
   const router = useRouter();
 
@@ -71,10 +73,14 @@ const BookingDetail = () => {
           <Modal.Window name="delete">
             <ConfirmDelete
               resourceName="booking"
-              onConfirm={function (): void {
-                throw new Error("Function not implemented.");
+              onConfirm={() => {
+                deleteBooking(id, {
+                  onSettled: () => {
+                    router.back()
+                  }
+                })
               }}
-              disabled={false}
+              disabled={isDeleting}
             />
           </Modal.Window>
         </Modal>

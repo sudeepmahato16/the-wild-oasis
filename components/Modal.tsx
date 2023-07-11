@@ -42,7 +42,7 @@ const Window: React.FC<WindowProps> = ({ children, name }) => {
     <div
       className="fixed top-0 left-0 w-full h-full bg-[rgba(0,0,0,0.3)] backdrop-blur-sm z-50 transition-all duration-500"
     >
-      <div     ref={ref} className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-lg py-8 px-10 transition-all duration-500">
+      <div ref={ref} className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-lg py-8 px-10 transition-all duration-500">
         <button
           type="button"
           className="bg-none border-none py-1 rounded-md translate-x-2 transition-all duration-200 absolute top-3 right-5"
