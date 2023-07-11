@@ -13,3 +13,13 @@ export const getBookings = async (query: {}) => {
     throw new Error("failed to fetch bookings");
   }
 };
+
+
+export const getBooking = async (id: string) => {
+  try {
+    const { data } = await axios.get(`/api/booking/${id}`);
+    return data;
+  } catch (error) {
+    throw new Error("failed to fetch booking");
+  }
+}

@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import { useRouter } from 'next/navigation';
 import { isToday, format } from "date-fns";
 import {
   HiArrowDownOnSquare,
@@ -41,7 +42,7 @@ const BookingRow: FC<BookingRowProps> = ({
     cabin: { name: cabinName },
   },
 }) => {
-
+  const router = useRouter();
   return (
     <Table.Row>
       <h4 className="text-[16px] font-semibold text-gray-600 font-sono">
@@ -82,7 +83,7 @@ const BookingRow: FC<BookingRowProps> = ({
           <Menu.List id={bookingId}>
             <Menu.Button
               icon={HiEye}
-              // onClick={() => navigate(`/bookings/${bookingId}`)}
+              onClick={() => router.push(`/bookings/${bookingId}`)}
             >
               See details
             </Menu.Button>

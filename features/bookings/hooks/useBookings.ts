@@ -1,7 +1,8 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import queryString from "query-string";
+
 import { getBookings } from "@/services/apiBooking";
 import { PAGE_SIZE } from "@/utils/config";
-import queryString from "query-string";
 
 export const useBookings = (query: queryString.ParsedQuery<string>) => {
   const queryClient = useQueryClient();

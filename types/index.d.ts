@@ -6,3 +6,17 @@ export interface INavLink {
     pathname: string,
     id: string
 }
+
+export type ExtendedBooking = Booking & {
+    guest: {
+      fullName: string;
+      email: string;
+      country: string;
+      countryFlag: string;
+      nationalID: string;
+      nationality: string;
+    };
+    cabin: {
+      name: string;
+    };
+  };

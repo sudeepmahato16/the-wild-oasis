@@ -30,7 +30,7 @@
 }
 
 .btn.medium {
-  @apply text-[14px] py-3 px-4 font-medium;
+  @apply text-[14px] py-[10px] px-4 font-medium;
 }
 
 .btn.large {
