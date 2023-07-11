@@ -91,7 +91,7 @@ const BookingRow: FC<BookingRowProps> = ({
             {status === "unconfirmed" && (
               <Menu.Button
                 icon={HiArrowDownOnSquare}
-                // onClick={() => navigate(`/checkin/${bookingId}`)}
+                onClick={() => router.push(`bookings/check-in/${bookingId}`)}
               >
                 Check in
               </Menu.Button>

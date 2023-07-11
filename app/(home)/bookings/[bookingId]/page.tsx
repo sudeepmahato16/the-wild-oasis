@@ -1,15 +1,9 @@
 import React from 'react'
 import BookingDetail from '@/features/bookings/BookingDetail'
 
-interface BookingProps{
-  params: {
-    bookingId: string
-  }
-}
-
-const Booking = ({params: {bookingId}}: BookingProps) => {
+const Booking = () => {
   return (
-    <BookingDetail id={bookingId}/>
+    <BookingDetail />
   )
 }
 

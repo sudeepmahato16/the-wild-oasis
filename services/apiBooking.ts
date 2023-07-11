@@ -23,3 +23,12 @@ export const getBooking = async (id: string) => {
     throw new Error("failed to fetch booking");
   }
 }
+
+export const updateBooking = async (id: string, payload: {}) => {
+  try {
+    const { data } = await axios.patch(`/api/booking/check-in/${id}`, payload);
+    return data;
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+}

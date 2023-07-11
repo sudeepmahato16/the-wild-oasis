@@ -86,7 +86,7 @@ const BookingDataBox: FC<BookingDataBoxProps> = ({ booking }) => {
         </DataItem>
 
         <div
-          className={`flex items-center justify-between py-[14px] px-7 rounded-md mt-6 ${
+          className={`flex items-center justify-between py-[12px] px-6 rounded-md mt-6 ${
             isPaid
               ? "bg-green-100 text-green-700"
               : "bg-yellow-100 text-yellow-700"

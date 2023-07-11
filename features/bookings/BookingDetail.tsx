@@ -1,5 +1,6 @@
 'use client'
 import React from "react";
+import { useRouter } from 'next/navigation';
 
 import BookingDataBox from "./BookingDataBox";
 import Modal from "@/components/Modal";
@@ -9,9 +10,10 @@ import ConfirmDelete from "@/components/ConfirmDelete";
 import { useBooking } from "./hooks/useBooking";
 import { useMoveBack } from "@/hooks/useMoveBack";
 
-const BookingDetail = ({ id }: { id: string }) => {
-  const { booking, isLoading } = useBooking(id);
+const BookingDetail = () => {
+  const { booking, isLoading } = useBooking();
   const moveBack = useMoveBack();
+  const router = useRouter();
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -38,7 +40,7 @@ const BookingDetail = ({ id }: { id: string }) => {
       <BookingDataBox booking={booking} />
 
       <div className="flex gap-3 justify-end">
-        {status === "unconfirmed" && <Button>Check in</Button>}
+        {status === "unconfirmed" && <Button onClick={() => router.push(`/bookings/check-in/${booking.id}`)}>Check in</Button>}
 
         {status === "checked-in" && (
           <Button>
