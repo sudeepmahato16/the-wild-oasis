@@ -1,8 +1,15 @@
 import React from 'react'
+import RegisterForm from '@/features/authentication/RegisterForm'
 
 const Users = () => {
   return (
-    <div>Users</div>
+    <>
+     <h1 className="text-[24px] font-semibold">
+      Create a new user
+     </h1>
+     <RegisterForm />
+
+    </>
   )
 }
 
