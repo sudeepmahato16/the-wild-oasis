@@ -6,6 +6,7 @@ export const config = {
         "/cabins",
         "/settings",
         "/bookings",
-        "/users"
+        "/users",
+        "/accounts"
     ]
 }
