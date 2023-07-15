@@ -14,7 +14,6 @@ export const getBookings = async (query: {}) => {
   }
 };
 
-
 export const getBooking = async (id: string) => {
   try {
     const { data } = await axios.get(`/api/booking/${id}`);
@@ -22,7 +21,7 @@ export const getBooking = async (id: string) => {
   } catch (error) {
     throw new Error("failed to fetch booking");
   }
-}
+};
 
 export const updateBooking = async (id: string, payload: {}) => {
   try {
@@ -31,11 +30,43 @@ export const updateBooking = async (id: string, payload: {}) => {
   } catch (error: any) {
     throw new Error(error.message);
   }
-}
+};
 
 export const deleteBooking = async (id: string) => {
   try {
     const { data } = await axios.delete(`/api/booking/${id}`);
+    return data;
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+};
+
+export const getBookingsAFterDate = async (date: string) => {
+  try {
+    const urlWithQuery = queryString.stringifyUrl({
+      url: "/api/booking/recent-bookings",
+      query: {
+        createdAt: date,
+      },
+    });
+
+    const { data } = await axios.get(urlWithQuery);
+    return data;
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+};
+
+export const getStaysAFterDate = async (date: string) => {
+  try {
+    const urlWithQuery = queryString.stringifyUrl({
+      url: "/api/booking/recent-stays",
+      query: {
+        startDate: date,
+      },
+    });
+
+    const { data } = await axios.get(urlWithQuery);
     return data;
   } catch (error: any) {
     throw new Error(error.message);

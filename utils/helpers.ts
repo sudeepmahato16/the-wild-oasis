@@ -5,10 +5,10 @@ export const formatCurrency = (value: number) =>
   );
 
 interface IOptions {
-  end?: Date;
+  end?: boolean;
 }
 
-export const getToday = (options?: IOptions) => {
+export const getToday = (options?: IOptions): string => {
   const today = new Date();
   if (options?.end) {
     today.setUTCHours(23, 59, 59, 999);

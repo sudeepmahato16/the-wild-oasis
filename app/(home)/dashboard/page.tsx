@@ -1,9 +1,18 @@
-import React from 'react'
+import React from "react";
+import DashboardLayout from "@/features/dashboard/DashboardLayout";
+import DashboardFilter from "@/features/dashboard/DashboardFilter";
 
 const Dashboard = () => {
   return (
-    <div>Dashboard</div>
-  )
-}
+    <>
+      <div className="flex items-center justify-between">
+        <h1 className="text-gray-800 font-semibold text-[24px]">Dashboard</h1>
+        <DashboardFilter />
+      </div>
 
-export default Dashboard
+      <DashboardLayout />
+    </>
+  );
+};
+
+export default Dashboard;
