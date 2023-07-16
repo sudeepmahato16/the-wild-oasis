@@ -24,6 +24,7 @@
     "react-hook-form": "^7.45.1",
     "react-hot-toast": "^2.4.1",
     "react-icons": "^4.10.1",
+    "recharts": "^2.7.2",
     "uuid": "^9.0.0"
   },
   "devDependencies": {

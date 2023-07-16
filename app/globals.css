@@ -98,3 +98,12 @@
 .stat-icon.green{
   @apply text-green-700 bg-green-100;
 }
+
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  @apply !stroke-gray-300
+}
+
+.recharts-pie-label-text {
+  @apply !font-medium
+}

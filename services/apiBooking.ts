@@ -72,3 +72,13 @@ export const getStaysAFterDate = async (date: string) => {
     throw new Error(error.message);
   }
 };
+
+
+export async function getStaysTodayActivity() {
+  try {
+    const { data } = await axios.get('/api/booking/today-activity');
+    return data;
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+}
