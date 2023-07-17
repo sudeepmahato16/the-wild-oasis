@@ -1,9 +1,8 @@
 "use client";
 import React, { FC, createContext, useContext, useState } from "react";
-import useOutsideClick from "@/hooks/useOutsideClick";
-import { createPortal } from "react-dom";
 import { HiEllipsisVertical } from "react-icons/hi2";
 import { IconType } from "react-icons/lib";
+import useOutsideClick from "@/hooks/useOutsideClick";
 
 interface MenusProps {
   children: React.ReactNode;
@@ -12,6 +11,7 @@ interface MenusProps {
 const Toggle = ({ id }: { id: string }) => {
   const { openId, close, open, setPosition } = useContext(MenuContext);
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
     const rect = (e.target as Element)
       ?.closest("button")
       ?.getBoundingClientRect();
@@ -76,7 +76,7 @@ const Button: FC<ButtonProps> = ({
 
 const List = ({ id, children }: { id: string; children: React.ReactNode }) => {
   const { openId, position, close } = useContext(MenuContext);
-  const { ref } = useOutsideClick(close);
+  const { ref } = useOutsideClick(close, false);
 
   if (openId !== id) return null;
 

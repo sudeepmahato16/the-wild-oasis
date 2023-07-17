@@ -1,5 +1,7 @@
 "use client";
 import React, { FC } from "react";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import { SubmitHandler, useForm, FieldValues } from "react-hook-form";
 import type { Session } from "next-auth";
 
@@ -7,7 +9,7 @@ import FormRow from "@/components/FormRow";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
 import { useUpdateUser } from "./hooks/useUpdateUser";
-
+import SpinnerMini from "@/components/Spinner";
 
 interface UpdateUserDataFormProps {
   session: Session | null;
@@ -15,13 +17,14 @@ interface UpdateUserDataFormProps {
 
 const UpdateUserDataForm: FC<UpdateUserDataFormProps> = ({ session }) => {
   const { email = "", name = "", image = "" } = session?.user || {};
+  const { update } = useSession();
+  const router = useRouter();
 
   const { updateUser, isUpdating } = useUpdateUser();
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm({
     defaultValues: {
       name,
@@ -37,6 +40,16 @@ const UpdateUserDataForm: FC<UpdateUserDataFormProps> = ({ session }) => {
       {
         name,
         image: typeof image !== "string" ? image[0] : image,
+      },
+      {
+        onSuccess: async (data) => {
+          await update({
+            user: {
+              ...data,
+            },
+          });
+          router.refresh();
+        },
       }
     );
   };
@@ -71,10 +84,13 @@ const UpdateUserDataForm: FC<UpdateUserDataFormProps> = ({ session }) => {
       </FormRow>
 
       <FormRow hasButton className="mt-4">
-        <Button type="reset" variant="secondary">
+        <Button type="reset" variant="secondary" onClick={() => router.back()}>
           Cancel
         </Button>
-        <Button type="submit">Update account</Button>
+        <Button type="submit" disabled={isUpdating} className="flex gap-2 ">
+          {isUpdating && <SpinnerMini />}
+          <span> Update account</span>
+        </Button>
       </FormRow>
     </form>
   );

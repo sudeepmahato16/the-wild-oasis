@@ -1,13 +1,18 @@
 "use client";
 import React from "react";
 import { SubmitHandler, useForm, FieldValues } from "react-hook-form";
-
+import { signOut } from "next-auth/react";
 
 import Button from "@/components/Button";
 import FormRow from "@/components/FormRow";
 import Input from "@/components/Input";
+import { useUpdateUser } from "./hooks/useUpdateUser";
+import SpinnerMini from "@/components/Spinner";
+import { useMoveBack } from "@/hooks/useMoveBack";
 
 const UpdatePasswordForm = () => {
+  const { updateUser, isUpdating } = useUpdateUser();
+  const onBack = useMoveBack();
   const {
     register,
     handleSubmit,
@@ -21,8 +26,21 @@ const UpdatePasswordForm = () => {
     },
   });
 
-  const onSubmit:SubmitHandler<FieldValues> = (data) => {
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    const { password } = data;
+    console.log(password)
 
+    updateUser(
+      {
+        password,
+      },
+      {
+        onSuccess: () => {
+          reset();
+          signOut();
+        },
+      }
+    );
   };
 
   return (
@@ -64,10 +82,13 @@ const UpdatePasswordForm = () => {
         />
       </FormRow>
       <FormRow hasButton className="mt-4">
-        <Button onClick={() => reset()} type="reset" variant="secondary">
+        <Button type="reset" variant="secondary" onClick={onBack}>
           Cancel
         </Button>
-        <Button >Update password</Button>
+        <Button type="submit" disabled={isUpdating} className="flex gap-2 ">
+          {isUpdating && <SpinnerMini />}
+          <span>Update password</span>
+        </Button>
       </FormRow>
     </form>
   );

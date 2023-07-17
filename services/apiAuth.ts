@@ -12,9 +12,10 @@ export const createUser = async (payload: { [x: string]: any }) => {
 
 export const updateUser = async (payload: { [x: string]: any }) => {
   try {
-    if (typeof payload.image !== "string") {
+    if (!payload.password && typeof payload.image !== "string") {
       payload.image = await uploadImage(payload.image);
     }
+
     const { data } = await axios.patch("/api/user", payload);
     return data;
   } catch (error: any) {

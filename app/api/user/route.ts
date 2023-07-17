@@ -10,7 +10,6 @@ export const PATCH = async (req: NextRequest, res: NextResponse) => {
     if (!token || !token?.email)
       return new Response("Unauthorised", { status: 401 });
 
-
     const { name, password, image } = await req.json();
     const data: any = {};
 
@@ -39,7 +38,6 @@ export const PATCH = async (req: NextRequest, res: NextResponse) => {
       },
     });
 
-   
     return new Response(JSON.stringify(user));
   } catch (error) {
     return new Response("Failed to update an account!", { status: 404 });

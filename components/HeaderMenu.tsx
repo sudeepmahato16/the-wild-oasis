@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
 import { useRouter } from "next/navigation";
-import Logout from "@/features/authentication/Logout";
 import { HiOutlineUser } from "react-icons/hi2";
+import Logout from "@/features/authentication/Logout";
 
 const HeaderMenu = () => {
   const router = useRouter();

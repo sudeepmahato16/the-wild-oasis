@@ -39,6 +39,24 @@ export const authOptions: AuthOptions = {
       },
     }),
   ],
+  callbacks: {
+    async session({ token, session, user }) {
+      if (token && session.user) {
+        session.user.name = token.name;
+        session.user.email = token.email;
+        session.user.image = String(token.image || token.picture);
+      }
+      
+      return session;
+    },
+    async jwt({ token, trigger, session }) {
+      if (trigger === "update") {
+        return { ...token, ...session.user };
+      }
+
+      return token;
+    },
+  },
   pages: {
     signIn: "/login",
   },
