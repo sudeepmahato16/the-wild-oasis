@@ -31,7 +31,7 @@ const UpdateSettingForm = () => {
   };
 
   return (
-    <form className="py-6 px-10 bg-white border border-gray-100 rounded-md text-[14px]">
+    <form className="py-6 px-10 bg-white dark:bg-black border border-gray-100 dark:border-gray-800 rounded-md text-[14px]">
       <FormRow label="Minimum nights/booking">
         <Input
           type="number"

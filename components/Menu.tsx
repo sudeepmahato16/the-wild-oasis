@@ -33,10 +33,10 @@ const Toggle = ({ id }: { id: string }) => {
   return (
     <button
       type="button"
-      className="bg-none border-none p-1 rounded-md translate-x-2 transition-all duration-200 hover:bg-gray-100 toggle-svg"
+      className="bg-none border-none p-1 rounded-md translate-x-2 transition-all duration-200 dark:hover:bg-gray-800 hover:bg-gray-100"
       onClick={handleClick}
     >
-      <HiEllipsisVertical className="w-6 h-6 stroke-gray-700" />
+      <HiEllipsisVertical className="w-6 h-6 stroke-gray-700 dark:stroke-gray-200 dark:text-gray-200" />
     </button>
   );
 };
@@ -64,11 +64,11 @@ const Button: FC<ButtonProps> = ({
       <button
         disabled={disabled}
         onClick={handleClick}
-        className="w-full text-left bg-none border-none py-3 px-5 text-[13.25px] transition-all duration-200 flex items-center gap-4 hover:bg-gray-50"
+        className="w-full text-left bg-none border-none py-3 px-5 text-[13.25px] transition-all duration-200 flex items-center gap-4 hover:bg-gray-50 dark:hover:bg-gray-900"
         type="button"
       >
-        <Icon className="w-4 h-4 stroke-gray-700" />
-        <span>{children}</span>
+        <Icon className="w-4 h-4 stroke-gray-700 text-gray-700 dark:text-gray-200 dark:stroke-gray-200" />
+        <span className="dark:text-gray-300">{children}</span>
       </button>
     </li>
   );
@@ -83,7 +83,7 @@ const List = ({ id, children }: { id: string; children: React.ReactNode }) => {
   return (
     <ul
       ref={ref}
-      className="fixed bg-white shadow-md rounded-md z-[9999] text-[12px]"
+      className="fixed bg-white dark:bg-black shadow-md rounded-md z-[9999] text-[12px]"
       style={{ right: `${position?.x}px`, top: `${position?.y}px` }}
     >
       {children}

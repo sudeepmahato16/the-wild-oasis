@@ -11,13 +11,15 @@ import {
 } from "recharts";
 import { Booking } from "@prisma/client";
 
+import {useDarkMode} from '@/context/DarkModeContext';
+
 interface SalesChartProps {
   bookings: Booking[];
   numDays: number;
 }
 
 const SalesChart: FC<SalesChartProps> = ({ bookings, numDays }) => {
-  const isDarkMode = false;
+  const isDarkMode = useDarkMode();
 
   const colors = isDarkMode
     ? {
@@ -51,8 +53,8 @@ const SalesChart: FC<SalesChartProps> = ({ bookings, numDays }) => {
   });
 
   return (
-    <div className="bg-white border border-gray-100 rounded-lg p-8 flex flex-col gap-6 col-span-full">
-      <h2 className="text-[18px] font-semibold text-gray-800">
+    <div className="bg-white dark:bg-black border border-gray-100 dark:border-gray-800 rounded-lg p-8 flex flex-col gap-6 col-span-full">
+      <h2 className="text-[18px] font-semibold text-gray-800 dark:text-gray-200">
         Sales from {format(allDates[0], "MMM dd yyyy")} &mdash;{" "}
         {format(allDates[allDates.length - 1], "MMM dd yyyy")}{" "}
       </h2>

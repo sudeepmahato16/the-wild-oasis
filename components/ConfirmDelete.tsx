@@ -16,8 +16,8 @@ const ConfirmDelete: React.FC<ConfirmDeleteProps> = ({
 }) => {
   return (
     <div className="w-[400px] flex flex-col gap-3">
-      <h1 className="text-[20px] font-medium">Delete {resourceName}</h1>
-      <p className="text-gray-500 text-[13.75px] leading-[1.6] mb-4">
+      <h1 className="text-[20px] font-medium dark:text-gray-300">Delete {resourceName}</h1>
+      <p className="text-gray-500 dark:text-gray-400 text-[13.75px] leading-[1.6] mb-4">
         Are you sure you want to delete this {resourceName} permanently? This action cannot be undone.
       </p>
 

@@ -48,7 +48,7 @@ const LoginForm = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="text-[14px] py-[22px] px-8 bg-white border border-gray-100 rounded-md"
+      className="text-[14px] py-[22px] px-8 bg-white dark:bg-black border dark:border-gray-800 border-gray-100 dark:b order-gray-800 rounded-md"
     >
       <FormRow
         label="Email address"

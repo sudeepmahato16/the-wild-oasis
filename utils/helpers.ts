@@ -26,7 +26,6 @@ export const formatDistanceFromNow = (dateStr: string) =>
     .replace("about ", "")
     .replace("in", "In");
 
+export const subtractDates = (dateStr1: string, dateStr2: string) =>
+  differenceInDays(parseISO(dateStr1), parseISO(dateStr2));
 
-export const subtractDates = (dateStr1: string, dateStr2: string) => (
-  differenceInDays(parseISO(dateStr1), parseISO(dateStr2))
-)

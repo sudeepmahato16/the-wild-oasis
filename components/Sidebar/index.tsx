@@ -5,7 +5,7 @@ import Uploader from "@/data/Uploader";
 
 const Sidebar = () => {
   return (
-    <aside className="row-span-full bg-white py-8 px-6 border-r border-gray-100 flex flex-col gap-8">
+    <aside className="row-span-full bg-white dark:bg-black py-8 px-6 border-r dark:border-gray-900 border-gray-100 flex flex-col gap-8">
       <Logo />
       <MainNav />
       <Uploader />

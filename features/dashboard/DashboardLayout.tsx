@@ -25,7 +25,7 @@ const DashboardLayout = () => {
     return <p>loading</p>;
 
   return (
-    <div className="grid grid-cols-[1fr_1fr_1fr_1fr]  gap-5">
+    <div className="grid grid-cols-[1fr_1fr_1fr_1fr] gap-5">
       <Stats
         bookings={bookings}
         confirmedStays={confirmedStays}

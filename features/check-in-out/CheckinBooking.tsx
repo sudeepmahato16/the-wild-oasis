@@ -59,7 +59,7 @@ const CheckinBooking = () => {
   return (
     <>
       <div className="flex justify-between items-center">
-        <h1 className="text-[24px] font-semibold">
+        <h1 className="text-[24px] font-semibold dark:text-gray-300">
           Check in booking #{cabin.name}
         </h1>
         <button
@@ -73,7 +73,7 @@ const CheckinBooking = () => {
       <BookingDataBox booking={booking} />
 
       {!hasBreakfast && (
-        <div className="bg-white border border-gray-100 rounded-md py-5 px-8">
+        <div className="bg-white border border-gray-100 dark:b order-gray-800 rounded-md py-5 px-8">
           <Checkbox
             checked={addBreakfast}
             onChange={() => {
@@ -87,7 +87,7 @@ const CheckinBooking = () => {
         </div>
       )}
 
-      <div className="bg-white border border-gray-100 rounded-md py-5 px-8">
+      <div className="bg-white dark:bg-black  border border-gray-100 dark:border-gray-800 dark:text-gray-300 rounded-md py-5 px-8">
         <Checkbox
           checked={confirmPaid}
           onChange={() => setConfirmPaid((confirm) => !confirm)}

@@ -153,7 +153,7 @@ const CreateCabinForm: React.FC<CreateCabinFormProps> = ({
           id="image"
           type="file"
           accept="image/*"
-          className="text-[14px]  image-input outline-violet-700"
+          className="text-[14px]  image-input outline-violet-700 dark:text-gray-300"
           {...register("image", {
             required: isEditSession ? false : "This field is required",
           })}

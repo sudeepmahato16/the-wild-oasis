@@ -16,14 +16,14 @@ const Logout = () => {
   return (
     <button
       type="button"
-      className="border-none p-[6px] rounded-md transition-all duration-200 hover:bg-gray-100 "
+      className="border-none p-[6px] rounded-md dark:hover:bg-gray-800 duration-200 hover:bg-gray-100 "
       disabled={isLoading}
       onClick={logout}
     >
       {!isLoading ? (
         <HiArrowRightOnRectangle className="w-5 h-5 text-indigo-500" />
       ) : (
-        <SpinnerMini />
+        <SpinnerMini className="dark:text-gray-400"/>
       )}
     </button>
   );

@@ -22,7 +22,7 @@ const BookingTable = () => {
   return (
     <Menu>
       <Table
-        className="bg-white w-full"
+        className="bg-white dark:bg-black w-full"
         columns="0.6fr 2fr 2.4fr 1.4fr 1fr 3.2rem"
       >
         <Table.Header>

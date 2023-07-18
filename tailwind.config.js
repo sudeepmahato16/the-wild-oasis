@@ -11,6 +11,7 @@ module.exports = {
     extend: {
       colors: {
         'white': '#fff',
+        'black': '#18212f'
       },
       fontFamily: {
         'sono': ['Sono', 'sans-serif']

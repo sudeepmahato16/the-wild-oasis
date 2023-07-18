@@ -4,21 +4,26 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  box-sizing: border-box;
+  transition: background-color 0.3s, border 0.3s;
+}
+
 .container {
   @apply max-w-[1440px] mx-auto my-0;
 }
 
 .nav-link:hover,
 .nav-link.active {
-  @apply text-gray-800 bg-gray-50 rounded-sm;
+  @apply text-gray-800 dark:text-gray-100 bg-gray-50 dark:bg-gray-900 rounded-sm;
 }
 
 .table {
-  @apply border border-gray-200 rounded-[7px] text-[14px];
+  @apply border border-gray-200 dark:border-gray-700 rounded-[6px] overflow-hidden text-[14px];
 }
 
 .table-heading {
-  @apply transition-none py-4 px-6 bg-gray-50 border-b  border-gray-200 uppercase font-semibold text-[13.25px] text-gray-600;
+  @apply transition-none py-4 px-6 bg-gray-50 dark:bg-gray-900 border-b  border-gray-200 dark:border-gray-700  uppercase font-semibold text-[13.25px] text-gray-600 dark:text-gray-300;
 }
 
 .btn {
@@ -42,7 +47,8 @@
 }
 
 .btn.secondary {
-  @apply border border-gray-200 bg-white hover:bg-gray-50;
+  border: 0.3px solid #e5e7eb;
+  @apply bg-white dark:bg-black text-gray-600 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-900 dark:text-gray-300;
 }
 
 .btn.danger {
@@ -50,7 +56,7 @@
 }
 
 .textarea {
-  @apply py-2 px-3 border text-[14px] border-gray-300 rounded-[5px] bg-white shadow-sm w-full h-24 resize-none;
+  @apply py-2 px-3 border text-[14px] border-gray-300 dark:border-gray-600 rounded-[5px] bg-white shadow-sm w-full h-24 resize-none dark:bg-black dark:text-gray-300;
 }
 
 .image-input::file-selector-button {
@@ -71,39 +77,42 @@
 }
 
 .unconfirmed {
-  @apply bg-blue-100 text-blue-700;
+  @apply bg-blue-100 text-blue-700 dark:bg-[#075985] dark:text-blue-100;
 }
 
 .checked-in {
-  @apply bg-green-100 text-green-700;
+  @apply bg-green-100 text-green-700 dark:bg-green-700 dark:text-green-100;
 }
 
 .checked-out {
   @apply bg-[#374151] text-[#f3f4f6];
 }
 
-
-.stat-icon.blue{
-  @apply text-blue-700 bg-blue-100
+.stat-icon.blue {
+  @apply text-blue-700 bg-blue-100 dark:bg-[#075985] dark:text-blue-100;
 }
 
-.stat-icon.indigo{
-  @apply text-indigo-700 bg-indigo-100
+.stat-icon.indigo {
+  @apply text-indigo-700 bg-indigo-100 dark:bg-indigo-700 dark:text-indigo-100 ;
 }
 
-.stat-icon.yellow{
-  @apply text-yellow-700 bg-yellow-100
+.stat-icon.yellow {
+  @apply text-yellow-700 bg-yellow-100 dark:bg-yellow-700 dark:text-yellow-100;
 }
 
-.stat-icon.green{
+.stat-icon.green {
   @apply text-green-700 bg-green-100;
 }
 
 .recharts-cartesian-grid-horizontal line,
 .recharts-cartesian-grid-vertical line {
-  @apply !stroke-gray-300
+  @apply !stroke-gray-300;
 }
 
 .recharts-pie-label-text {
-  @apply !font-medium
+  @apply !font-medium;
+}
+
+.pagination-btn:hover:not(:disabled) {
+  @apply text-indigo-50 bg-indigo-600;
 }

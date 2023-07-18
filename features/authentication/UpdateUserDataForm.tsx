@@ -56,7 +56,7 @@ const UpdateUserDataForm: FC<UpdateUserDataFormProps> = ({ session }) => {
 
   return (
     <form
-      className="py-6 px-10 bg-white border border-gray-100 rounded-md text-[14px]"
+      className="py-6 px-10 bg-white dark:bg-black border border-gray-100 dark:border-gray-800 rounded-md text-[14px]"
       onSubmit={handleSubmit(onSubmit)}
     >
       <FormRow label="Email address" id="email">
@@ -84,7 +84,7 @@ const UpdateUserDataForm: FC<UpdateUserDataFormProps> = ({ session }) => {
       </FormRow>
 
       <FormRow hasButton className="mt-4">
-        <Button type="reset" variant="secondary" onClick={() => router.back()}>
+        <Button type="reset" disabled={isUpdating} variant="secondary" onClick={() => router.back()}>
           Cancel
         </Button>
         <Button type="submit" disabled={isUpdating} className="flex gap-2 ">

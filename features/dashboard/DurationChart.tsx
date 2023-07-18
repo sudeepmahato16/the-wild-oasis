@@ -8,6 +8,8 @@ import {
   Tooltip,
 } from "recharts";
 import { Booking } from "@prisma/client";
+
+import {useDarkMode} from '@/context/DarkModeContext';
 import { startDataDark, startDataLight } from "@/utils/constants";
 
 function prepareData(startData: any[], stays: any[]) {
@@ -40,13 +42,13 @@ interface DurationChartProps {
 }
 
 const DurationChart: FC<DurationChartProps> = ({ confirmedStays }) => {
-  const isDarkMode = false;
+  const {isDarkMode} = useDarkMode();
   const startData = isDarkMode ? startDataDark : startDataLight;
   const data = prepareData(startData, confirmedStays);
 
   return (
-    <div className="col-start-3 col-span-2 bg-white border border-gray-100 py-6 px-8 first:mb-4">
-      <h2 className="text-[18px] font-semibold text-gray-800">
+    <div className="col-start-3 col-span-2 bg-white dark:bg-black border border-gray-100 dark:border-gray-800 py-6 px-8 first:mb-4 rounded-lg">
+      <h2 className="text-[18px] font-semibold text-gray-800 dark:text-gray-200">
         Stay duration summary
       </h2>
       <ResponsiveContainer width="100%" height={240} className="text-[14px]">

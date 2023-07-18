@@ -42,13 +42,13 @@ const Window: React.FC<WindowProps> = ({ children, name }) => {
     <div
       className="fixed top-0 left-0 w-full h-full bg-[rgba(0,0,0,0.3)] backdrop-blur-sm z-50 transition-all duration-500"
     >
-      <div ref={ref} className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-lg py-8 px-10 transition-all duration-500">
+      <div ref={ref} className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-black rounded-lg shadow-lg py-8 px-10 transition-all duration-500">
         <button
           type="button"
           className="bg-none border-none py-1 rounded-md translate-x-2 transition-all duration-200 absolute top-3 right-5"
           onClick={close}
         >
-          <HiXMark className="w-6 h-6 stroke-gray-500 text-gray-500" />
+          <HiXMark className="w-6 h-6 stroke-gray-500 text-gray-500 dark:text-gray-400" />
         </button>
         {cloneElement(children, { onCloseModal: close })}
       </div>

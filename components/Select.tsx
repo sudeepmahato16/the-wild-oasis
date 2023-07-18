@@ -16,7 +16,7 @@ interface SelectProps
 const Select: React.FC<SelectProps> = ({ options, className, ...props }) => {
   return (
     <select
-      className={`text-[13px] py-2 px-3 border rounded-md bg-white font-medium shadow-sm ${className}`}
+      className={`text-[13px] py-2 px-3 border rounded-md bg-white dark:bg-black font-medium shadow-sm ${className} dark:text-gray-300 border-none`}
       {...props}
     >
       {options.map((option) => {

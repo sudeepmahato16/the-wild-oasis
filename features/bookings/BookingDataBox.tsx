@@ -34,7 +34,7 @@ const BookingDataBox: FC<BookingDataBoxProps> = ({ booking }) => {
   } = booking;
 
   return (
-    <section className="bg-white border border-gray-100 rounded-md">
+    <section className="bg-white dark:bg-black border border-gray-100 dark:border-gray-800 rounded-md overflow-hidden">
       <header className="bg-indigo-500 py-[18px] px-10 text-[#e0e7ff]  font-medium flex items-center justify-between">
         <div className="flex items-center gap-4 font-medium text-[16px]">
           <HiOutlineHomeModern className="h-[24px] w-[24px]" />
@@ -53,17 +53,17 @@ const BookingDataBox: FC<BookingDataBoxProps> = ({ booking }) => {
       </header>
 
       <section className="pt-8 pb-3 px-10 text-[14px]">
-        <div className="flex items-center gap-3 mb-4 text-gray-50">
+        <div className="flex items-center gap-3 mb-4 text-gray-500 dark:text-gray-400 ">
           {country && (
             <Image
-              className="rounded-sm block border border-gray-100"
+              className="rounded-sm block border border-gray-100 dark:border-gray-800"
               src={country}
               width={20}
               height={16}
               alt={`Flag of ${nationality}`}
             />
           )}
-          <p className="font-medium text-gray-700">
+          <p className="font-medium text-gray-700 dark:text-gray-300">
             {guestName} {numGuests > 1 ? `+ ${numGuests - 1} guests` : ""}
           </p>
           <span>&bull;</span>
@@ -77,28 +77,37 @@ const BookingDataBox: FC<BookingDataBoxProps> = ({ booking }) => {
             icon={HiOutlineChatBubbleBottomCenterText}
             label="Observations"
           >
-            {observations}
+            <span className="dark:text-gray-300">{observations}</span>
           </DataItem>
         )}
 
         <DataItem icon={HiOutlineCheckCircle} label="Breakfast included?">
-          {hasBreakfast ? "Yes" : "No"}
+          <span className="dark:text-gray-300">
+            {hasBreakfast ? "Yes" : "No"}
+          </span>
         </DataItem>
 
         <div
           className={`flex items-center justify-between py-[12px] px-6 rounded-md mt-6 ${
             isPaid
-              ? "bg-green-100 text-green-700"
-              : "bg-yellow-100 text-yellow-700"
+              ? "bg-green-100 text-green-700 dark:bg-green-700 dark:text-green-100"
+              : "bg-yellow-100 text-yellow-700 dark:bg-yellow-700 dark:text-yellow-100"
           }`}
         >
-          <DataItem icon={HiOutlineCurrencyDollar} label={`Total price`}>
-            {formatCurrency(totalPrice)}
+          <DataItem
+            icon={HiOutlineCurrencyDollar}
+            label={`Total price`}
+            iconStyle='!text-inherit'
+            className="!text-inherit"
+          >
+            <span >
+              {formatCurrency(totalPrice)}
 
-            {hasBreakfast &&
-              ` (${formatCurrency(cabinPrice)} cabin + ${formatCurrency(
-                extrasPrice
-              )} breakfast)`}
+              {hasBreakfast &&
+                ` (${formatCurrency(cabinPrice)} cabin + ${formatCurrency(
+                  extrasPrice
+                )} breakfast)`}
+            </span>
           </DataItem>
 
           <p className="uppercase text-[13.25px] font-semibold">
@@ -107,7 +116,7 @@ const BookingDataBox: FC<BookingDataBoxProps> = ({ booking }) => {
         </div>
       </section>
 
-      <footer className="py-4 px-10 text-[12px] text-gray-500 text-right">
+      <footer className="py-4 px-10 text-[12px] text-gray-500  dark:text-gray-400 text-right">
         <p>Booked {format(new Date(createdAt), "EEE, MMM dd yyyy, p")}</p>
       </footer>
     </section>

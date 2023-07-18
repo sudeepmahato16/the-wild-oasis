@@ -45,17 +45,17 @@ const CabinRow: React.FC<CabinRowProps> = ({ cabin }) => {
         className="scale-[1.3] -translate-x-[12px] w-auto h-auto"
       />
 
-      <h4 className="text-[16px] font-sono text-gray-600 font-semibold">
+      <h4 className="text-[15px] font-sono text-gray-600 dark:text-gray-300 font-semibold">
         {name}
       </h4>
-      <span className="text-gray-500 text-[12.75px]">
+      <span className="text-gray-500 dark:text-gray-400 text-[12.75px]">
         Fits up to {maxCapacity} guests
       </span>
-      <span className="font-sono font-semibold">
+      <span className="font-sono font-semibold dark:text-gray-300">
         {formatCurrency(regularPrice)}
       </span>
       {discount ? (
-        <span className="font-sono font-medium text-green-700">
+        <span className="font-sono font-medium text-green-700 dark:text-green-100">
           {formatCurrency(discount)}
         </span>
       ) : (

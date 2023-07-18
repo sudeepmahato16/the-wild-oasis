@@ -8,7 +8,7 @@ const Cabins = () => {
   return (
     <>
       <div className="flex justify-between items-center">
-        <h1 className="text-[24px] font-semibold">All cabins</h1>
+        <h1 className="text-[24px] dark:text-gray-100 font-semibold">All cabins</h1>
         <CabinTableOperation />
       </div>
 

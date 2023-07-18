@@ -49,23 +49,23 @@ const BookingRow: FC<BookingRowProps> = ({
   const { isDeleting, deleteBooking } = useDeleteBooking();
   return (
     <Table.Row>
-      <h4 className="text-[16px] font-semibold text-gray-600 font-sono">
+      <h4 className="text-[16px] font-semibold text-gray-600 dark:text-gray-300 font-sono">
         {cabinName}
       </h4>
 
       <div className="flex flex-col gap-1">
-        <span className="font-medium">{guestName}</span>
-        <span className="text-gray-500 text-[12px]">{email}</span>
+        <span className="font-medium dark:text-gray-300">{guestName}</span>
+        <span className="text-gray-500  dark:text-gray-400 text-[12px]">{email}</span>
       </div>
 
-      <div className="flex flex-col gap-1">
-        <span className="font-medium">
+      <div className="flex flex-col gap-1 dark:text-gray-300">
+        <span className="font-medium ">
           {isToday(new Date(startDate))
             ? "Today"
             : formatDistanceFromNow(String(startDate))}{" "}
           &rarr; {numNights} night stay
         </span>
-        <span className="text-gray-500 text-[12px]">
+        <span className="text-gray-500 dark:text-gray-400 text-[12px]">
           {format(new Date(startDate), "MMM dd yyyy")} &mdash;{" "}
           {format(new Date(endDate), "MMM dd yyyy")}
         </span>
@@ -77,7 +77,7 @@ const BookingRow: FC<BookingRowProps> = ({
         {status.replace("-", " ")}
       </span>
 
-      <span className="font-sano font-medium">
+      <span className="font-sano font-medium dark:text-gray-300">
         {formatCurrency(totalPrice)}
       </span>
 

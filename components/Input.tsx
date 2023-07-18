@@ -12,7 +12,7 @@ const Input: React.ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
   return (
     <input
       ref={ref}
-      className={`border border-gray-300 bg-white rounded-md py-2 px-3 shadow-sm outline-violet-700 ${className}`}
+      className={`border border-gray-300 dark:border-gray-600 dark:text-gray-300 bg-white dark:bg-black rounded-md py-2 px-3 shadow-sm outline-violet-700 ${className}`}
       {...props}
     />
   );

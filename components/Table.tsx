@@ -43,7 +43,7 @@ const Body: React.FC<BodyProps> = ({ data, render }) => {
         No data to show at the moment
       </p>
     );
-  return <section className="mt-1">{data.map(render)}</section>;
+  return <section className="pt-1">{data.map(render)}</section>;
 };
 
 const Row = ({ children }: { children: ReactNode }) => {
@@ -54,7 +54,7 @@ const Row = ({ children }: { children: ReactNode }) => {
     style={{
       gridTemplateColumns: columns
     }}
-      className={`grid items-center gap-x-6 transition-none py-2 px-6 border-b border-gray-200 `}
+      className={`grid items-center dark:bg-black gap-x-6 transition-none py-2 px-6 border-b border-gray-200 dark:border-gray-700`}
       role="row"
     >
       {children}
@@ -63,7 +63,7 @@ const Row = ({ children }: { children: ReactNode }) => {
 };
 
 const Footer = ({children}: {children: React.ReactNode}) => {
-  return <footer className="bg-gray-50 flex justify-center p-3 [&:not(has(*))]:hidden">
+  return <footer className="bg-gray-50 dark:bg-gray-900 flex justify-center p-3 [&:not(has(*))]:hidden">
     {children}
   </footer>
 }

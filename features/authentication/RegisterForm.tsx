@@ -34,7 +34,7 @@ const RegisterForm = () => {
 
   return (
     <form
-      className="text-[14px] py-[24px] px-10 bg-white border border-gray-100 rounded-md"
+      className="text-[14px] py-[24px] px-10 bg-white dark:bg-black border border-gray-100 dark:border-gray-800 rounded-md"
       onSubmit={handleSubmit(onSubmit)}
     >
       <FormRow

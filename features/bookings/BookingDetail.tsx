@@ -32,7 +32,7 @@ const BookingDetail = () => {
     <>
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-6">
-          <h1 className="text-[24px] font-semibold">Booking #{name}</h1>
+          <h1 className="text-[24px] font-semibold dark:text-gray-300">Booking #{name}</h1>
           <span
             className={`w-fit uppercase text-[11px] font-semibold py-1 px-3 rounded-full ${status}`}
           >

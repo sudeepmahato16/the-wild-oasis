@@ -24,14 +24,14 @@ const Filter: React.FC<FilterProps> = ({ options, filterField }) => {
   };
 
   return (
-    <div className="border border-gray-100 bg-white shadow-sm rounded-md p-1 flex gap-1">
+    <div className="border border-gray-100 dark:border-gray-800 bg-white dark:bg-black shadow-sm rounded-md p-1 flex gap-1">
       {options.map((option) => (
         <button
           type="button"
-          className={` border-none rounded-md font-medium text-[13px] py-[4px] px-2 transition-all duration-300 ${
+          className={` border-none rounded-md font-medium text-[13px] py-[4px] px-2 transition-all duration-300 hover:bg-indigo-600 hover:text-indigo-50 ${
             option.value === currentFilter
               ? "bg-indigo-600 text-indigo-50"
-              : "bg-white"
+              : "bg-white dark:bg-black dark:hover:bg-indigo-600 dark:text-gray-300 "
           }`}
           key={option.value}
           onClick={() => handleClick(option.value)}
