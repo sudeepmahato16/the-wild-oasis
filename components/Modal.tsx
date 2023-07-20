@@ -6,6 +6,7 @@ import React, {
   useState,
   createContext,
   ReactElement,
+  useEffect
 } from "react";
 import { createPortal } from "react-dom";
 import { HiXMark } from "react-icons/hi2";
@@ -66,7 +67,6 @@ const Modal: React.FC<ModalProps> & {
   Window: typeof Window;
 } = ({ children }) => {
   const [openName, setOpenName] = useState("");
-
   const close = () => {
     setOpenName("");
   };

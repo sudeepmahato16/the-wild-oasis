@@ -10,12 +10,10 @@ const useOutsideClick = (action: () => void, listenCapturing = true) => {
       }
     };
 
-    document.addEventListener("mousedown", handleClick, listenCapturing);
-    document.addEventListener("touchstart", handleClick, listenCapturing);
+    document.addEventListener("click", handleClick, listenCapturing);
 
     return () => {
-      document.removeEventListener("mousedown", handleClick, listenCapturing);
-      document.removeEventListener("touchstart", handleClick, listenCapturing);
+      document.removeEventListener("click", handleClick, listenCapturing);
     };
   }, [action, listenCapturing]);
 

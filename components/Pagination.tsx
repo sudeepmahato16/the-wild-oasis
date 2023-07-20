@@ -26,7 +26,7 @@ const Pagination: FC<PaginationProps> = ({ count }) => {
     addQueryToUrl({ page: prev });
   };
 
-  const buttonStyle = `border-none rounded-md font-medium text-[13.5px] flex items-center justify-between gap-1 py-[4px] px-2 bg-indigo-50 active:text-indigo-50 text-[inherit] pagination-btn disabled:cursor-not-allowed`;
+  const buttonStyle = `border-none rounded-md font-medium text-[13.5px] flex items-center justify-between gap-1 py-[4px] px-2 bg-indigo-50 dark:bg-black dark:text-indigo-50 active:text-indigo-50 text-[inherit] pagination-btn disabled:cursor-not-allowed`;
 
   return (
     <div className="w-full flex items-center justify-between">
@@ -65,3 +65,5 @@ const Pagination: FC<PaginationProps> = ({ count }) => {
 };
 
 export default Pagination;
+
+

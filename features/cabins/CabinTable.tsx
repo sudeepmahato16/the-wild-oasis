@@ -40,7 +40,7 @@ const CabinTable = () => {
     <Menus>
       <Table
         className="bg-white dark:bg-black w-full"
-        columns="0.6fr 1.8fr 2.2fr 1fr 1fr 1fr"
+        columns="75px 1.8fr 2.2fr 1fr 1fr 1fr"
       >
         <Table.Header>
           <div role="rowheader"></div>

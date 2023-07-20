@@ -8,7 +8,7 @@ const AddCabin = () => {
   return (
     <Modal>
       <Modal.Open opens="cabin-form">
-        <Button className="max-w-fit">Add new cabin</Button>
+        <Button className="max-w-fit ml-auto">Add new cabin</Button>
       </Modal.Open>
       <Modal.Window name="cabin-form">
         <CreateCabinForm />

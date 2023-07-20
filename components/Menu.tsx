@@ -9,25 +9,13 @@ interface MenusProps {
 }
 
 const Toggle = ({ id }: { id: string }) => {
-  const { openId, close, open, setPosition } = useContext(MenuContext);
+  const { openId, close, open, setOffsetTop } = useContext(MenuContext);
+
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
-    const rect = (e.target as Element)
-      ?.closest("button")
-      ?.getBoundingClientRect();
+    setOffsetTop((e.target as Element)?.getBoundingClientRect().top)
 
-    if (rect) {
-      setPosition({
-        x: window.innerWidth - rect.width - rect.x,
-        y: rect.y + rect.height + 8,
-      });
-    }
-
-    if (openId === "" || openId !== id) {
-      open(id);
-    } else {
-      close();
-    }
+    openId === "" || openId !== id ? open(id) : close();
   };
 
   return (
@@ -55,12 +43,14 @@ const Button: FC<ButtonProps> = ({
   disabled = false,
 }) => {
   const { close } = useContext(MenuContext);
+
   const handleClick = () => {
     onClick?.();
     close();
   };
+
   return (
-    <li>
+    <li className="min-w-[180px]">
       <button
         disabled={disabled}
         onClick={handleClick}
@@ -68,14 +58,14 @@ const Button: FC<ButtonProps> = ({
         type="button"
       >
         <Icon className="w-4 h-4 stroke-gray-700 text-gray-700 dark:text-gray-200 dark:stroke-gray-200" />
-        <span className="dark:text-gray-300">{children}</span>
+        <span className="dark:text-gray-300 ">{children}</span>
       </button>
     </li>
   );
 };
 
 const List = ({ id, children }: { id: string; children: React.ReactNode }) => {
-  const { openId, position, close } = useContext(MenuContext);
+  const { openId, close, offsetTop } = useContext(MenuContext);
   const { ref } = useOutsideClick(close, false);
 
   if (openId !== id) return null;
@@ -83,8 +73,7 @@ const List = ({ id, children }: { id: string; children: React.ReactNode }) => {
   return (
     <ul
       ref={ref}
-      className="fixed bg-white dark:bg-black shadow-md rounded-md z-[9999] text-[12px]"
-      style={{ right: `${position?.x}px`, top: `${position?.y}px` }}
+      className={`absolute ${(window.innerHeight - offsetTop) > 200 ? "top-[120%]": "bottom-[90%]"}  right-[10%] w-auto bg-white dark:bg-black shadow-md rounded-md z-[9999] text-[12px]`}
     >
       {children}
     </ul>
@@ -95,8 +84,8 @@ const MenuContext = createContext({
   openId: "",
   open: (id: string) => {},
   close: () => {},
-  position: null as { x: number; y: number } | null,
-  setPosition: (val: { x: number; y: number } | null) => {},
+  offsetTop: 0,
+  setOffsetTop: (val: number) => {}
 });
 
 const Menu: FC<MenusProps> & {
@@ -105,17 +94,16 @@ const Menu: FC<MenusProps> & {
   List: typeof List;
 } = ({ children }) => {
   const [openId, setOpenId] = useState("");
-  const [position, setPosition] = useState<null | { x: number; y: number }>(
-    null
-  );
+  const [offsetTop, setOffsetTop] = useState(0);
+
   const close = () => setOpenId("");
   const open = setOpenId;
 
   return (
     <MenuContext.Provider
-      value={{ openId, close, open, position, setPosition }}
+      value={{ openId, close, open, offsetTop, setOffsetTop }}
     >
-      <div className="flex items-center justify-end">{children}</div>
+      <div className="flex items-center justify-end relative">{children}</div>
     </MenuContext.Provider>
   );
 };

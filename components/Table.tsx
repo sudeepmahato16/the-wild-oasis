@@ -23,7 +23,7 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
     style={{
       gridTemplateColumns: columns
     }}
-      className={`grid items-center gap-x-6 table-heading`}
+      className={`grid items-center gap-x-6 table-heading rounded-tr-[6px] rounded-tl-[6px]`}
       role="row"
     >
       {children}
@@ -63,7 +63,7 @@ const Row = ({ children }: { children: ReactNode }) => {
 };
 
 const Footer = ({children}: {children: React.ReactNode}) => {
-  return <footer className="bg-gray-50 dark:bg-gray-900 flex justify-center p-3 [&:not(has(*))]:hidden">
+  return <footer className="bg-gray-50 dark:bg-gray-900 flex justify-center p-3 [&:not(has(*))]:hidden rounded-br-[6px] rounded-bl-[6px]">
     {children}
   </footer>
 }

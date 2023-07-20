@@ -37,13 +37,15 @@ const CabinRow: React.FC<CabinRowProps> = ({ cabin }) => {
 
   return (
     <Table.Row>
+      <div className="w-[75px] h-[48px] relative">
       <Image
         src={image}
         alt={name}
-        width={75}
-        height={48}
-        className="scale-[1.3] -translate-x-[12px] w-auto h-auto"
-      />
+        fill
+        sizes="75px"
+        className="scale-[1.2] -translate-x-[12px] "
+        />
+        </div>
 
       <h4 className="text-[15px] font-sono text-gray-600 dark:text-gray-300 font-semibold">
         {name}

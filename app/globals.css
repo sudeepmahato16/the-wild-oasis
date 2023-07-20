@@ -19,7 +19,7 @@
 }
 
 .table {
-  @apply border border-gray-200 dark:border-gray-700 rounded-[6px] overflow-hidden text-[14px];
+  @apply border border-gray-200 min-w-[672px] dark:border-gray-700 rounded-[6px] text-[14px];
 }
 
 .table-heading {
