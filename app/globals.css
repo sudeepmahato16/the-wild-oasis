@@ -116,3 +116,20 @@
 .pagination-btn:hover:not(:disabled) {
   @apply text-indigo-50 bg-indigo-600;
 }
+
+
+.css-1dimb5e-singleValue{
+  @apply dark:!text-gray-300 text-gray-600;
+}
+
+.css-1xc3v61-indicatorContainer{
+  @apply h-8 w-8 items-center justify-center !p-0;
+}
+
+.css-1xc3v61-indicatorContainer {
+  @apply h-8 w-8
+}
+
+.css-1u9des2-indicatorSeparator{
+  @apply hidden;
+}

@@ -19,7 +19,7 @@ interface SalesChartProps {
 }
 
 const SalesChart: FC<SalesChartProps> = ({ bookings, numDays }) => {
-  const isDarkMode = useDarkMode();
+  const {isDarkMode} = useDarkMode();
 
   const colors = isDarkMode
     ? {

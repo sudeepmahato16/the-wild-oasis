@@ -24,7 +24,7 @@ const Filter: React.FC<FilterProps> = ({ options, filterField }) => {
   };
 
   return (
-    <div className="border border-gray-100 dark:border-gray-800 bg-white dark:bg-black shadow-sm rounded-md p-1 flex gap-1">
+    <div className="border border-gray-100 dark:border-gray-800 bg-white dark:bg-black shadow-sm rounded-md p-[4.5px] flex gap-1">
       {options.map((option) => (
         <button
           type="button"
