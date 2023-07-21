@@ -10,30 +10,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Account {
-  id                String    @id @default(auto()) @map("_id") @db.ObjectId
-  userId            String    @db.ObjectId
-  providerType      String
-  providerId        String
-  providerAccountId String
-  refresh_token     String?
-  access_token      String?
-  expires_at        DateTime?
-  token_type        String?
-  createdAt         DateTime  @default(now())
-  updatedAt         DateTime  @updatedAt
-  user              User      @relation(fields: [userId], references: [id])
-
-  @@unique([providerId, providerAccountId])
-}
-
-model Session {
-  id           String   @id @default(auto()) @map("_id") @db.ObjectId
-  userId       String   @db.ObjectId
-  expires      DateTime
-  sessionToken String   @unique
-  user         User     @relation(fields: [userId], references: [id])
-}
 
 model User {
   id            String    @id @default(auto()) @map("_id") @db.ObjectId
@@ -44,8 +20,6 @@ model User {
   image         String?
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
-  accounts      Account[]
-  sessions      Session[]
 }
 
 model Cabin {

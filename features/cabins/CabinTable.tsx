@@ -6,6 +6,7 @@ import { Cabin } from "@prisma/client";
 import Table from "@/components/Table";
 import Menus from "@/components/Menu";
 import CabinRow from "./CabinRow";
+import {Loader} from '@/components/Loader'
 import { useCabins } from "./hooks/useCabins";
 
 const CabinTable = () => {
@@ -13,7 +14,7 @@ const CabinTable = () => {
   const searchParams = useSearchParams();
   const filterValue = searchParams.get("discount") || "all";
 
-  if (isLoading) return <p>loading..</p>;
+  if (isLoading) return <Loader />
 
   if (!cabins) return <p>No cabins could be found</p>;
 

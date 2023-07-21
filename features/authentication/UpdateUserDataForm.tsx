@@ -8,8 +8,9 @@ import type { Session } from "next-auth";
 import FormRow from "@/components/FormRow";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
+import {SpinnerMini} from "@/components/Loader";
+
 import { useUpdateUser } from "./hooks/useUpdateUser";
-import SpinnerMini from "@/components/Spinner";
 
 interface UpdateUserDataFormProps {
   session: Session | null;
@@ -78,7 +79,7 @@ const UpdateUserDataForm: FC<UpdateUserDataFormProps> = ({ session }) => {
           id="image"
           type="file"
           accept="image/*"
-          className="text-[14px]  image-input outline-violet-700"
+          className="text-[14px] dark:text-gray-300 image-input outline-violet-700"
           {...register("image")}
         />
       </FormRow>

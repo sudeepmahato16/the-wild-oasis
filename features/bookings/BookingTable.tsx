@@ -7,6 +7,7 @@ import Menu from "@/components/Menu";
 import Table from "@/components/Table";
 import Pagination from "@/components/Pagination";
 import BookingRow, { ExtendedBooking } from "./BookingRow";
+import { Loader } from "@/components/Loader";
 
 import { useBookings } from "./hooks/useBookings";
 
@@ -15,7 +16,7 @@ const BookingTable = () => {
   const query = queryString.parse(params.toString());
   const { bookings, isLoading, count } = useBookings(query);
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <Loader />
 
   if (!bookings) return <p>No bookings could be found</p>;
 

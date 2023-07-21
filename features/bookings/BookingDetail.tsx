@@ -6,6 +6,7 @@ import BookingDataBox from "./BookingDataBox";
 import Modal from "@/components/Modal";
 import Button from "@/components/Button";
 import ConfirmDelete from "@/components/ConfirmDelete";
+import { Loader } from "@/components/Loader";
 
 import { useBooking } from "./hooks/useBooking";
 import { useMoveBack } from "@/hooks/useMoveBack";
@@ -20,7 +21,7 @@ const BookingDetail = () => {
   const router = useRouter();
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <Loader />
   }
   const {
     status,

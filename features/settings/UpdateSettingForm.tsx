@@ -4,6 +4,7 @@ import { Settings } from "@prisma/client";
 
 import FormRow from "@/components/FormRow";
 import Input from "@/components/Input";
+import {Loader} from '@/components/Loader'
 
 import { useSettings } from "./hooks/useSettings";
 import { useUpdateSettings } from "./hooks/useUpdateSettings";
@@ -12,7 +13,7 @@ const UpdateSettingForm = () => {
   const { isLoading, settings } = useSettings();
   const { updateSettings, isUpdating } = useUpdateSettings();
 
-  if (isLoading) return <p>loading..</p>;
+  if (isLoading) return <Loader />
   const {
     breakfastPrice,
     maxBookingLength,

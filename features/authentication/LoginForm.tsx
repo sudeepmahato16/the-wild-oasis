@@ -6,7 +6,7 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 
 import Input from "@/components/Input";
-import SpinnerMini from "@/components/Spinner";
+import {SpinnerMini} from "@/components/Loader";
 import Button from "@/components/Button";
 import FormRow from "@/components/FormRow";
 

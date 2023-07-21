@@ -2,9 +2,12 @@
 import React from "react";
 import TodayItem from "./TodayItem";
 import { useTodayActivity } from "./hooks/useTodayActivity";
+import { Loader } from "@/components/Loader";
+
 
 const TodayActivity = () => {
   const { activities, isLoading } = useTodayActivity();
+
   return (
     <div className="bg-white dark:bg-black border border-gray-100 dark:border-gray-800 rounded-l-none p-8 flex flex-col gap-6 col-span-2 col-start-1 pt-6">
       <div className="flex items-center justify-between">
@@ -24,7 +27,7 @@ const TodayActivity = () => {
           </p>
         )
       ) : (
-        <p>Loading...</p>
+        <Loader className="!h-full w-full [&>svg]:w-[40px] [&>svg]:h-[40px] "/>
       )}
     </div>
   );

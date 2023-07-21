@@ -5,7 +5,7 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import FormRow from "@/components/FormRow";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
-import SpinnerMini from "@/components/Spinner";
+import {SpinnerMini} from "@/components/Loader";
 import { useRegister } from "./hooks/useRegister";
 
 const RegisterForm = () => {

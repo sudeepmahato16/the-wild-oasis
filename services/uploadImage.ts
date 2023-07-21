@@ -1,4 +1,5 @@
 import axios from "axios";
+import { CLOUDINARY_KEY } from "@/utils/config";
 
 export const uploadImage = async (image: File) => {
   const formData = new FormData();
@@ -8,7 +9,7 @@ export const uploadImage = async (image: File) => {
   const {
     data: { secure_url },
   } = await axios.post(
-    `https://api.cloudinary.com/v1_1/dzxjgqfli/image/upload`,
+    `https://api.cloudinary.com/v1_1/${CLOUDINARY_KEY}/image/upload`,
     formData
   );
 

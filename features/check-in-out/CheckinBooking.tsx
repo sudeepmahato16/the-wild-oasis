@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import BookingDataBox from "../bookings/BookingDataBox";
 import Button from "@/components/Button";
 import Checkbox from "@/components/Checkbox";
+import {Loader} from '@/components/Loader'
 
 import { useBooking } from "../bookings/hooks/useBooking";
 import { useMoveBack } from "@/hooks/useMoveBack";
@@ -25,7 +26,7 @@ const CheckinBooking = () => {
     setConfirmPaid(isPaid ?? false);
   }, [isPaid]);
 
-  if (isLoading || isLoadingSettings) return <p>Loading...</p>;
+  if (isLoading || isLoadingSettings) return <Loader />;
 
   const handleCheckIn = () => {
     if (!confirmPaid) return;

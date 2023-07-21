@@ -7,7 +7,7 @@ import Button from "@/components/Button";
 import FormRow from "@/components/FormRow";
 import Input from "@/components/Input";
 import { useUpdateUser } from "./hooks/useUpdateUser";
-import SpinnerMini from "@/components/Spinner";
+import {SpinnerMini} from "@/components/Loader";
 import { useMoveBack } from "@/hooks/useMoveBack";
 
 const UpdatePasswordForm = () => {

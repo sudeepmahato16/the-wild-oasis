@@ -6,7 +6,7 @@ import React, {
   useState,
   createContext,
   ReactElement,
-  useEffect
+  useEffect,
 } from "react";
 import { createPortal } from "react-dom";
 import { HiXMark } from "react-icons/hi2";
@@ -40,10 +40,11 @@ const Window: React.FC<WindowProps> = ({ children, name }) => {
   if (name !== openName) return null;
 
   return createPortal(
-    <div
-      className="fixed top-0 left-0 w-full h-full bg-[rgba(0,0,0,0.3)] backdrop-blur-sm z-50 transition-all duration-500"
-    >
-      <div ref={ref} className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-black rounded-lg shadow-lg py-8 px-10 transition-all duration-500">
+    <div className="fixed top-0 left-0 w-full h-full bg-[rgba(0,0,0,0.3)] backdrop-blur-sm z-50 transition-all duration-500">
+      <div
+        ref={ref}
+        className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-black rounded-lg shadow-lg py-8 px-10 transition-all duration-500"
+      >
         <button
           type="button"
           className="bg-none border-none py-1 rounded-md translate-x-2 transition-all duration-200 absolute top-3 right-5"
@@ -67,6 +68,20 @@ const Modal: React.FC<ModalProps> & {
   Window: typeof Window;
 } = ({ children }) => {
   const [openName, setOpenName] = useState("");
+
+  useEffect(() => {
+    const body = document.body; 
+    if (openName) {
+      const scrollTop = document.documentElement.scrollTop;
+      body.style.top = `-${scrollTop}px`;
+      body.classList.add("noscroll");
+    } else {
+      const top = parseFloat(body.style.top) * -1
+      body.classList.remove("noscroll");
+      if(top) document.documentElement.scrollTop = top;
+    }
+  }, [openName]);
+
   const close = () => {
     setOpenName("");
   };

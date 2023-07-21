@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { signOut } from "next-auth/react";
 import { HiArrowRightOnRectangle } from "react-icons/hi2";
-import SpinnerMini from "@/components/Spinner";
+import {SpinnerMini} from "@/components/Loader";
 
 const Logout = () => {
   const [isLoading, setIsLoading] = useState(false);
