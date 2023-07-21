@@ -12,7 +12,7 @@ export const useBooking = (): {isLoading: boolean, booking: ExtendedBooking} => 
     error,
   } = useQuery({
     queryKey: ["booking", bookingId],
-    queryFn: () => getBooking(bookingId),
+    queryFn: () => getBooking(String(bookingId)),
     retry: false
   });
 
