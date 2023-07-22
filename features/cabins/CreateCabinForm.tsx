@@ -5,6 +5,7 @@ import { Cabin } from "@prisma/client";
 import FormRow from "@/components/FormRow";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
+import SpinnerMini from "@/components/Loader";
 
 import { useCreateOrEditCabin } from "./hooks/useCreateOrEditCabin";
 
@@ -168,8 +169,9 @@ const CreateCabinForm: React.FC<CreateCabinFormProps> = ({
         >
           Cancel
         </Button>
-        <Button disabled={isWorking} type="submit">
-          {isEditSession ? "Edit cabin" : "Create new cabin"}
+        <Button disabled={isWorking} type="submit" className="flex items-center gap-2">
+        {isWorking && <SpinnerMini />}
+          <span>{isEditSession ? "Edit cabin" : "Create new cabin"}</span>
         </Button>
       </FormRow>
     </form>

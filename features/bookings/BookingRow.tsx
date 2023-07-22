@@ -47,6 +47,13 @@ const BookingRow: FC<BookingRowProps> = ({
   const router = useRouter();
   const { checkout, isCheckingOut } = useCheckout();
   const { isDeleting, deleteBooking } = useDeleteBooking();
+
+  const onDelete = (closeModal?: () => void) => {
+    deleteBooking(bookingId, {
+      onSettled: () => closeModal?.(),
+    });
+  };
+
   return (
     <Table.Row>
       <h4 className="text-[16px] font-semibold text-gray-600 dark:text-gray-300 font-sono">
@@ -55,7 +62,9 @@ const BookingRow: FC<BookingRowProps> = ({
 
       <div className="flex flex-col gap-1">
         <span className="font-medium dark:text-gray-300">{guestName}</span>
-        <span className="text-gray-500  dark:text-gray-400 text-[12px]">{email}</span>
+        <span className="text-gray-500  dark:text-gray-400 text-[12px]">
+          {email}
+        </span>
       </div>
 
       <div className="flex flex-col gap-1 dark:text-gray-300">
@@ -121,7 +130,8 @@ const BookingRow: FC<BookingRowProps> = ({
           <ConfirmDelete
             resourceName="booking"
             disabled={isDeleting}
-            onConfirm={() => deleteBooking(bookingId)}
+            onConfirm={onDelete}
+            isLoading={isDeleting}
           />
         </Modal.Window>
       </Modal>

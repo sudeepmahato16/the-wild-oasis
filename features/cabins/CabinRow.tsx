@@ -35,17 +35,24 @@ const CabinRow: React.FC<CabinRowProps> = ({ cabin }) => {
     });
   };
 
+  const onDelete = (closeModal?: () => void) =>
+    deleteCabin(id, {
+      onSettled: () => {
+        closeModal?.();
+      },
+    });
+
   return (
     <Table.Row>
       <div className="w-[75px] h-[48px] relative">
-      <Image
-        src={image}
-        alt={name}
-        fill
-        sizes="75px"
-        className="scale-[1.2] -translate-x-[12px] "
+        <Image
+          src={image}
+          alt={name}
+          fill
+          sizes="75px"
+          className="scale-[1.2] -translate-x-[12px] "
         />
-        </div>
+      </div>
 
       <h4 className="text-[15px] font-sono text-gray-600 dark:text-gray-300 font-semibold">
         {name}
@@ -88,8 +95,9 @@ const CabinRow: React.FC<CabinRowProps> = ({ cabin }) => {
 
         <Modal.Window name="delete">
           <ConfirmDelete
+          isLoading={isDeleting}
             disabled={isDeleting}
-            onConfirm={() => deleteCabin(id)}
+            onConfirm={onDelete}
             resourceName="cabins"
           />
         </Modal.Window>

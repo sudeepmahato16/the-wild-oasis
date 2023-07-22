@@ -73,14 +73,16 @@ const BookingDetail: FC<BookingDetailProps> = ({ booking }) => {
           <Modal.Window name="delete">
             <ConfirmDelete
               resourceName="booking"
-              onConfirm={() => {
+              onConfirm={(closeModal) => {
                 deleteBooking(id, {
                   onSettled: () => {
+                    closeModal?.();
                     router.back();
                   },
                 });
               }}
               disabled={isDeleting}
+              isLoading={isDeleting}
             />
           </Modal.Window>
         </Modal>
