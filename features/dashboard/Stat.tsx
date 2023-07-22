@@ -1,14 +1,23 @@
 import React, { FC } from "react";
 import { IconType } from "react-icons/lib";
 
+import { SpinnerMini } from "@/components/Loader";
+
 interface StatProps {
   icon: IconType;
   title: string;
   value: number | string;
   color: string;
+  isLoading: boolean;
 }
 
-const Stat: FC<StatProps> = ({ icon: Icon, title, value, color }) => {
+const Stat: FC<StatProps> = ({
+  icon: Icon,
+  title,
+  value,
+  color,
+  isLoading,
+}) => {
   return (
     <div className="bg-white dark:bg-black border border-gray-100 dark:border-gray-800 rounded-lg p-4 grid grid-cols-[64px_1fr] grid-rows-[auto_auto] gap-x-4 gap-y-1">
       <div
@@ -19,7 +28,13 @@ const Stat: FC<StatProps> = ({ icon: Icon, title, value, color }) => {
       <h5 className="self-end text-[11px] uppercase font-semibold text-gray-500  dark:text-gray-400 tracking-[0.4px]">
         {title}
       </h5>
-      <p className="text-[18px] leading-[1] font-medium text-gray-800 dark:text-gray-200">{value}</p>
+      {isLoading ? (
+        <SpinnerMini className="text-gray-700 dark:text-gray-400" />
+      ) : (
+        <p className="text-[18px] leading-[1] font-medium text-gray-800 dark:text-gray-200">
+          {value}
+        </p>
+      )}
     </div>
   );
 };

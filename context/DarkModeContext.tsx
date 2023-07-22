@@ -1,5 +1,6 @@
 "use client";
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { SkeletonTheme } from "react-loading-skeleton";
 
 const DarkModeContext = createContext({
   isDarkMode: false,
@@ -11,7 +12,7 @@ export const DarkModeProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
     const storedValue = localStorage.getItem("theme");
@@ -41,7 +42,12 @@ export const DarkModeProvider = ({
 
   return (
     <DarkModeContext.Provider value={{ isDarkMode, toggleDarkMode }}>
+         <SkeletonTheme
+        baseColor={!isDarkMode ? "#efefef" : "#18212f"}
+        highlightColor={!isDarkMode ? "#f3f4f6" : "#1f2937"}
+      >
       {children}
+      </SkeletonTheme>
     </DarkModeContext.Provider>
   );
 };

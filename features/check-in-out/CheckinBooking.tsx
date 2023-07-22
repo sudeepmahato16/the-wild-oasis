@@ -1,23 +1,25 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
+import { Settings } from "@prisma/client";
 
 import BookingDataBox from "../bookings/BookingDataBox";
 import Button from "@/components/Button";
 import Checkbox from "@/components/Checkbox";
-import {Loader} from '@/components/Loader'
 
-import { useBooking } from "../bookings/hooks/useBooking";
 import { useMoveBack } from "@/hooks/useMoveBack";
 import { formatCurrency } from "@/utils/helpers";
 import { useCheckin } from "./hooks/useCheckin";
-import { useSettings } from "../settings/hooks/useSettings";
+import { ExtendedBooking } from "@/types";
 
-const CheckinBooking = () => {
+interface CheckinBookingProps {
+  booking: ExtendedBooking;
+  settings: Settings
+}
+
+const CheckinBooking: FC<CheckinBookingProps> = ({ booking, settings }) => {
   const [confirmPaid, setConfirmPaid] = useState(false);
   const [addBreakfast, setAddBreakfast] = useState(false);
-  const { booking, isLoading } = useBooking();
   const { isCheckingIn, checkin } = useCheckin();
-  const { settings, isLoading: isLoadingSettings } = useSettings();
   const moveBack = useMoveBack();
 
   const { isPaid } = booking || { isPaid: false };
@@ -26,7 +28,6 @@ const CheckinBooking = () => {
     setConfirmPaid(isPaid ?? false);
   }, [isPaid]);
 
-  if (isLoading || isLoadingSettings) return <Loader />;
 
   const handleCheckIn = () => {
     if (!confirmPaid) return;
@@ -36,7 +37,7 @@ const CheckinBooking = () => {
         breakfast: {
           hasBreakfast: true,
           extrasPrice: optionalBreakfastPrice,
-          totalPrice: totalPrice + optionalBreakfastPrice
+          totalPrice: totalPrice + optionalBreakfastPrice,
         },
       });
     } else {

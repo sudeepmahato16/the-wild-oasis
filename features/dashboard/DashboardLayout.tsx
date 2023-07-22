@@ -15,15 +15,11 @@ import { useCabins } from "../cabins/hooks/useCabins";
 const DashboardLayout = () => {
   const { bookings, isLoading: bookingsIsLoading } = useRecentBookings();
   const {
-    stays,
     isLoading: staysIsLoading,
     confirmedStays,
     numDays,
   } = useRecentStays();
-  const { cabins, isLoading: cabinIsLoading } = useCabins();
-
-  if (bookingsIsLoading || staysIsLoading || cabinIsLoading)
-    return <Loader />
+  const { cabins=[], isLoading: cabinIsLoading } = useCabins();
     
   return (
     <div className="grid grid-cols-[1fr_1fr_1fr_1fr] gap-5">
@@ -32,10 +28,11 @@ const DashboardLayout = () => {
         confirmedStays={confirmedStays}
         numDays={numDays}
         cabinCount={cabins.length}
+        isLoading={bookingsIsLoading || staysIsLoading}
       />
       <TodayActivity />
-      <DurationChart confirmedStays={confirmedStays} />
-      <SalesChart bookings={bookings} numDays={numDays} />
+      <DurationChart confirmedStays={confirmedStays} isLoading={staysIsLoading} />
+      <SalesChart bookings={bookings} numDays={numDays} isLoading={bookingsIsLoading || staysIsLoading} />
     </div>
   );
 };

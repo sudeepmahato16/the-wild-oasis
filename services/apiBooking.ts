@@ -14,15 +14,6 @@ export const getBookings = async (query: {}) => {
   }
 };
 
-export const getBooking = async (id: string) => {
-  try {
-    const { data } = await axios.get(`/api/booking/${id}`);
-    return data;
-  } catch (error) {
-    throw new Error("failed to fetch booking");
-  }
-};
-
 export const updateBooking = async (id: string, payload: {}) => {
   try {
     const { data } = await axios.patch(`/api/booking/check-in/${id}`, payload);
@@ -73,10 +64,9 @@ export const getStaysAFterDate = async (date: string) => {
   }
 };
 
-
 export async function getStaysTodayActivity() {
   try {
-    const { data } = await axios.get('/api/booking/today-activity');
+    const { data } = await axios.get("/api/booking/today-activity");
     return data;
   } catch (error: any) {
     throw new Error(error.message);

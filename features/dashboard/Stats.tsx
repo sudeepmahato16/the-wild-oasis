@@ -3,7 +3,7 @@ import {
   HiOutlineBanknotes,
   HiOutlineCalendarDays,
   HiOutlineChartBar,
-  HiOutlineBriefcase ,
+  HiOutlineBriefcase,
 } from "react-icons/hi2";
 import { Booking } from "@prisma/client";
 
@@ -15,13 +15,15 @@ interface StatsProps {
   confirmedStays: Booking[];
   numDays: number;
   cabinCount: number;
+  isLoading: boolean;
 }
 
 const Stats: FC<StatsProps> = ({
-  bookings,
-  confirmedStays,
-  numDays,
-  cabinCount,
+  bookings=[],
+  confirmedStays=[],
+  numDays=0,
+  cabinCount=0,
+  isLoading,
 }) => {
   const numBookings = bookings.length;
   const sales = bookings.reduce((acc, cur) => acc + cur.totalPrice, 0);
@@ -34,8 +36,9 @@ const Stats: FC<StatsProps> = ({
       <Stat
         title="Bookings"
         color="blue"
-        icon={HiOutlineBriefcase }
+        icon={HiOutlineBriefcase}
         value={numBookings}
+        isLoading={isLoading}
       />
 
       <Stat
@@ -43,18 +46,21 @@ const Stats: FC<StatsProps> = ({
         color="green"
         icon={HiOutlineBanknotes}
         value={formatCurrency(sales)}
+        isLoading={isLoading}
       />
       <Stat
         title="Check ins"
         color="indigo"
         icon={HiOutlineCalendarDays}
         value={checkins}
+        isLoading={isLoading}
       />
       <Stat
         title="Occupancy rate"
         color="yellow"
         icon={HiOutlineChartBar}
         value={Math.round(occupation * 100) + "%"}
+        isLoading={isLoading}
       />
     </>
   );

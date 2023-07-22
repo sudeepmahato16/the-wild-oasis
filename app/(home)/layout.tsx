@@ -2,6 +2,8 @@ import React from "react";
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
 
+import "react-loading-skeleton/dist/skeleton.css";
+
 interface LayoutProps {
   children: React.ReactNode;
 }

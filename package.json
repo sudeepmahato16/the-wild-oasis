@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^0.4.4-canary.81",
@@ -24,8 +25,10 @@
     "react-hook-form": "^7.45.1",
     "react-hot-toast": "^2.4.1",
     "react-icons": "^4.10.1",
+    "react-loading-skeleton": "^3.3.1",
     "react-select": "^5.7.4",
     "recharts": "^2.7.2",
+    "server-only": "^0.0.1",
     "uuid": "^9.0.0"
   },
   "devDependencies": {

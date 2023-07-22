@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import CabinTable from "@/features/cabins/CabinTable";
 import AddCabin from "@/features/cabins/AddCabin";

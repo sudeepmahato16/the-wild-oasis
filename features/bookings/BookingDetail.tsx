@@ -1,39 +1,40 @@
 "use client";
-import React from "react";
+import React, { FC } from "react";
 import { useRouter } from "next/navigation";
 
 import BookingDataBox from "./BookingDataBox";
 import Modal from "@/components/Modal";
 import Button from "@/components/Button";
 import ConfirmDelete from "@/components/ConfirmDelete";
-import { Loader } from "@/components/Loader";
 
-import { useBooking } from "./hooks/useBooking";
 import { useMoveBack } from "@/hooks/useMoveBack";
 import { useCheckout } from "../check-in-out/hooks/useCheckout";
 import { useDeleteBooking } from "./hooks/useDeleteBooking";
+import { ExtendedBooking } from "./BookingRow";
 
-const BookingDetail = () => {
-  const { booking, isLoading } = useBooking();
+interface BookingDetailProps {
+  booking: ExtendedBooking;
+}
+
+const BookingDetail: FC<BookingDetailProps> = ({ booking }) => {
   const { checkout, isCheckingOut } = useCheckout();
-  const {isDeleting, deleteBooking} = useDeleteBooking();
+  const { isDeleting, deleteBooking } = useDeleteBooking();
   const moveBack = useMoveBack();
   const router = useRouter();
 
-  if (isLoading) {
-    return <Loader />
-  }
   const {
     status,
     cabin: { name },
-    id
+    id,
   } = booking;
 
   return (
     <>
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-6">
-          <h1 className="text-[24px] font-semibold dark:text-gray-300">Booking #{name}</h1>
+          <h1 className="text-[24px] font-semibold dark:text-gray-300">
+            Booking #{name}
+          </h1>
           <span
             className={`w-fit uppercase text-[11px] font-semibold py-1 px-3 rounded-full ${status}`}
           >
@@ -53,9 +54,7 @@ const BookingDetail = () => {
 
       <div className="flex gap-3 justify-end">
         {status === "unconfirmed" && (
-          <Button
-            onClick={() => router.push(`/bookings/check-in/${id}`)}
-          >
+          <Button onClick={() => router.push(`/bookings/check-in/${id}`)}>
             Check in
           </Button>
         )}
@@ -77,9 +76,9 @@ const BookingDetail = () => {
               onConfirm={() => {
                 deleteBooking(id, {
                   onSettled: () => {
-                    router.back()
-                  }
-                })
+                    router.back();
+                  },
+                });
               }}
               disabled={isDeleting}
             />

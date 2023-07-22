@@ -1,12 +1,15 @@
 "use client";
 import React from "react";
+import Skeleton, {SkeletonTheme} from "react-loading-skeleton";
+
 import TodayItem from "./TodayItem";
 import { useTodayActivity } from "./hooks/useTodayActivity";
-import { Loader } from "@/components/Loader";
+import {useDarkMode} from "@/context/DarkModeContext"
 
 
 const TodayActivity = () => {
   const { activities, isLoading } = useTodayActivity();
+  const {isDarkMode} = useDarkMode();
 
   return (
     <div className="bg-white dark:bg-black border border-gray-100 dark:border-gray-800 rounded-l-none p-8 flex flex-col gap-6 col-span-2 col-start-1 pt-6">
@@ -27,7 +30,14 @@ const TodayActivity = () => {
           </p>
         )
       ) : (
-        <Loader className="!h-full w-full [&>svg]:w-[40px] [&>svg]:h-[40px] "/>
+        <SkeletonTheme
+        baseColor={!isDarkMode ? "#efefef" : "#111827"}
+        highlightColor={!isDarkMode ? "#f3f4f6" : "#1f2937"}
+      >
+        <Skeleton height="46px" width="100%" className="rounded-md"/>
+        <Skeleton height="46px" width="100%" className="rounded-md"/>
+        <Skeleton height="46px" width="100%" className="rounded-md"/>
+        </SkeletonTheme>
       )}
     </div>
   );

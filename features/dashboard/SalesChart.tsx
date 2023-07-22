@@ -9,6 +9,7 @@ import {
   Tooltip,
   Area,
 } from "recharts";
+import Skeleton, {SkeletonTheme} from "react-loading-skeleton";
 import { Booking } from "@prisma/client";
 
 import {useDarkMode} from '@/context/DarkModeContext';
@@ -16,10 +17,12 @@ import {useDarkMode} from '@/context/DarkModeContext';
 interface SalesChartProps {
   bookings: Booking[];
   numDays: number;
+  isLoading: boolean;
 }
 
-const SalesChart: FC<SalesChartProps> = ({ bookings, numDays }) => {
+const SalesChart: FC<SalesChartProps> = ({ bookings=[], numDays=0, isLoading }) => {
   const {isDarkMode} = useDarkMode();
+  
 
   const colors = isDarkMode
     ? {
@@ -58,7 +61,7 @@ const SalesChart: FC<SalesChartProps> = ({ bookings, numDays }) => {
         Sales from {format(allDates[0], "MMM dd yyyy")} &mdash;{" "}
         {format(allDates[allDates.length - 1], "MMM dd yyyy")}{" "}
       </h2>
-      <ResponsiveContainer height={300} width="100%" className="text-[14px]">
+      {isLoading ? <SalesChartLoader /> : <ResponsiveContainer height={300} width="100%" className="text-[14px]">
         <AreaChart data={data}>
           <XAxis
             dataKey="label"
@@ -91,9 +94,23 @@ const SalesChart: FC<SalesChartProps> = ({ bookings, numDays }) => {
             unit="$"
           />
         </AreaChart>
-      </ResponsiveContainer>
+      </ResponsiveContainer>}
     </div>
   );
 };
 
 export default SalesChart;
+
+
+const SalesChartLoader = () => {
+  const {isDarkMode} = useDarkMode();
+  return  <SkeletonTheme
+  baseColor={!isDarkMode ? "#efefef" : "#111827"}
+  highlightColor={!isDarkMode ? "#f3f4f6" : "#1f2937"}
+>
+  <Skeleton height="300px" width="100%" className="!rounded-md"/>
+
+ 
+  
+  </SkeletonTheme>
+}

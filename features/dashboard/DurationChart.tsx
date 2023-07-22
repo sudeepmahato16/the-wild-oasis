@@ -7,6 +7,7 @@ import {
   ResponsiveContainer,
   Tooltip,
 } from "recharts";
+import Skeleton, {SkeletonTheme} from "react-loading-skeleton";
 import { Booking } from "@prisma/client";
 
 import {useDarkMode} from '@/context/DarkModeContext';
@@ -39,19 +40,19 @@ function prepareData(startData: any[], stays: any[]) {
 
 interface DurationChartProps {
   confirmedStays: Booking[];
+  isLoading: boolean
 }
 
-const DurationChart: FC<DurationChartProps> = ({ confirmedStays }) => {
+const DurationChart: FC<DurationChartProps> = ({ confirmedStays=[], isLoading}) => {
   const {isDarkMode} = useDarkMode();
   const startData = isDarkMode ? startDataDark : startDataLight;
   const data = prepareData(startData, confirmedStays);
-
   return (
     <div className="col-start-3 col-span-2 bg-white dark:bg-black border border-gray-100 dark:border-gray-800 py-6 px-8 first:mb-4 rounded-lg">
       <h2 className="text-[18px] font-semibold text-gray-800 dark:text-gray-200">
         Stay duration summary
       </h2>
-      <ResponsiveContainer width="100%" height={240} className="text-[14px]">
+      {isLoading ? <DurationChartLoader />: <ResponsiveContainer width="100%" height={240} className="text-[14px]">
         <PieChart>
           <Pie
             data={data}
@@ -81,9 +82,30 @@ const DurationChart: FC<DurationChartProps> = ({ confirmedStays }) => {
             iconType="circle"
           />
         </PieChart>
-      </ResponsiveContainer>
+      </ResponsiveContainer>}
     </div>
   );
 };
 
 export default DurationChart;
+
+
+const DurationChartLoader = () => {
+  const {isDarkMode} = useDarkMode();
+  return  <SkeletonTheme
+  baseColor={!isDarkMode ? "#efefef" : "#111827"}
+  highlightColor={!isDarkMode ? "#f3f4f6" : "#1f2937"}
+>
+  <div className="flex items-center justify-between">
+  <Skeleton height="200px" width="200px" className="!rounded-full"/>
+
+  <div className="flex flex-col gap-1 ">
+  <Skeleton height="18px" width="108px" />
+  <Skeleton height="18px" width="108px"/>
+  <Skeleton height="18px" width="108px"/>
+  <Skeleton height="18px" width="108px"/>
+    </div>
+    </div>
+  
+  </SkeletonTheme>
+}
