@@ -63,7 +63,7 @@ const Row = ({ children }: { children: ReactNode }) => {
 };
 
 const Footer = ({children}: {children: React.ReactNode}) => {
-  return <footer className="bg-gray-50 dark:bg-gray-900 flex justify-center p-3 [&:not(has(*))]:hidden rounded-br-[6px] rounded-bl-[6px]">
+  return <footer className="bg-gray-50 dark:bg-gray-900 dark:text-gray-300 flex justify-center p-3 [&:not(has(*))]:hidden rounded-br-[6px] rounded-bl-[6px]">
     {children}
   </footer>
 }

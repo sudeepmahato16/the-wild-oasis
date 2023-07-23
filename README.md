@@ -1,34 +1,114 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# The Wild Oasis
 
-## Getting Started
+The Wild Oasis is an internal hotel management system built with nextjs13, prisma, MongoDB, typescript, tailwind CSS and many other technologies. It allows employees to manage everything about hotel bookings, cabins, and guests.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+1. **User Authentication and Signup:**
+   - Hotel employees can log in to the application to perform tasks.
+   - New users can only be signed up within the application to ensure that only actual hotel employees can create accounts.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. **User Profile Management:**
+   - Users can upload an avatar to personalize their profile.
+   - Users can change their name and password.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. **Cabin Management:**
+   - The app provides a table view with all cabins.
+   - The table view displays cabin information, including cabin photo, name, capacity, price, and current discount.
+   - Users can update or delete existing cabins.
+   - Users can create new cabins, including the ability to upload a photo.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+4. **Booking Management:**
+   - The app provides a table view with all bookings.
+   - The table view displays booking information, including arrival and departure dates, booking status, paid amount, cabin details, and guest data.
+   - Booking status can be "unconfirmed," "checked in," or "checked out."
+   - The table view is filterable by booking status.
+   - Additional booking data includes the number of guests, number of nights, guest observations, and whether breakfast was booked and its price.
+ 
+5. **Booking Operations:**
+   - Users can delete, check-in, or check out a booking as the guest arrives.
+   - On check-in, users can accept payment outside the app and then confirm the payment within the app.
+   - Guests can add breakfast for the entire stay during check-in if they hadn't already.
 
-## Learn More
+6. **Guest Data Management:**
+   - Guest data contains full name, email, national ID, nationality, and a country flag for easy identification.
 
-To learn more about Next.js, take a look at the following resources:
+7. **Dashboard:**
+   - The initial app screen serves as a dashboard displaying important information for the last 7, 30, or 90 days.
+   - It shows a list of guests checking in and out on the current day, and users can perform tasks related to these activities from the dashboard.
+   - The dashboard provides statistics on recent bookings, sales, check-ins, and occupancy rates.
+   - It includes a chart showing all daily hotel sales, distinguishing between "total" sales and "extras" sales (only breakfast at present).
+   - There's also a chart displaying statistics on stay durations, an important metric for the hotel.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+8. **Application-wide Settings:**
+   - Users can define application-wide settings such as breakfast price, minimum and maximum nights per booking, and maximum guests per booking.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+9. **Dark Mode:**
+   - The app includes a dark mode option for a different visual appearance and enhanced user experience in low-light conditions.
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Demo
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+You can check out a live demo [here](https://the-wild-oasis-roan.vercel.app).
+
+## Screenshots
+
+  <kbd><img width="890" alt="login" src="https://github.com/sudeepmahato16/the-wild-oasis/assets/122378993/b6b8135e-6348-49a1-8945-8a4a07677be0"></kbd>
+
+  <kbd><img width="957" alt="dashboard" src="https://github.com/sudeepmahato16/the-wild-oasis/assets/122378993/81e89ec0-4993-46c7-a305-a8ef607f2289"></kbd>
+
+  <kbd><img width="956" alt="bookings" src="https://github.com/sudeepmahato16/the-wild-oasis/assets/122378993/d077282d-aaf6-4d90-8a4f-5b4bf8a9bb49"></kbd>
+
+  <kbd><img width="957" alt="single-booking" src="https://github.com/sudeepmahato16/the-wild-oasis/assets/122378993/9cb1c6cc-b792-48c4-92ce-438c083a398e"></kbd>
+
+  <kbd><img width="935" alt="update-user" src="https://github.com/sudeepmahato16/the-wild-oasis/assets/122378993/f325dffe-6fc2-4e17-a0ed-0cd0fc6d151e"></kbd>
+
+  <kbd><img width="956" alt="create-cabin" src="https://github.com/sudeepmahato16/the-wild-oasis/assets/122378993/6f27f3af-6a58-4029-b763-a03dc5544ae8"></kbd>
+
+
+## Installation
+
+- Clone the repository:
+
+    ```
+    git clone https://github.com/sudeepmahato16/the-wild-oasis.git
+    ```
+-  Navigate to the project directory:
+
+    ```
+    cd the-wild-oasis
+    ```
+-  Install the dependencies:
+
+    ```
+    npm install
+    ```
+-  Set up the environment variables:
+
+   1. Create a `.env` file in the root directory.
+
+   2. Add the following variables to the .env file, replacing the placeholder values with your own:
+
+    ```
+    DATABASE_URL=<your-mongodb-uri>
+    NEXTAUTH_SECRET=<your-nextauth-secret>
+    NEXT_PUBLIC_CLOUDINARY_KEY=<your-cloudinary-cloud-name>
+    ```
+
+## Usage
+
+- Start the development server:
+
+    ```
+    npm run dev
+    ```
+- Open your browser and visit `http://localhost:3000` to access the application.
+
+## Contributing
+
+Contributions are welcome! If you want to contribute to this project, please follow these steps:
+
+- Fork the repository.
+- Create a new branch for your feature or bug fix.
+- Commit your changes to the new branch.
+- Open a pull request back to the main repository, including a description of your changes.
