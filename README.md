@@ -1,6 +1,9 @@
 # The Wild Oasis
 
+![dashboard](https://github.com/sudeepmahato16/the-wild-oasis/assets/122378993/5ce3f792-2321-4f5d-b1ac-059340142864)
+
 The Wild Oasis is an internal hotel management system built with nextjs13, prisma, MongoDB, typescript, tailwind CSS and many other technologies. It allows employees to manage everything about hotel bookings, cabins, and guests.
+
 
 ## Features
 
@@ -53,17 +56,13 @@ You can check out a live demo [here](https://the-wild-oasis-roan.vercel.app).
 
 ## Screenshots
 
-  <kbd><img width="890" alt="login" src="https://github.com/sudeepmahato16/the-wild-oasis/assets/122378993/b6b8135e-6348-49a1-8945-8a4a07677be0"></kbd>
+  <kbd><img width="890" alt="login" src="https://github.com/sudeepmahato16/the-wild-oasis/assets/122378993/6648f02d-fb01-46ac-810c-fa47066e83ff"></kbd>
 
-  <kbd><img width="957" alt="dashboard" src="https://github.com/sudeepmahato16/the-wild-oasis/assets/122378993/81e89ec0-4993-46c7-a305-a8ef607f2289"></kbd>
+  <kbd><img width="957" alt="dashboard" src="https://github.com/sudeepmahato16/the-wild-oasis/assets/122378993/77754290-4df7-42ee-9e13-66748d596cff"></kbd>
 
-  <kbd><img width="956" alt="bookings" src="https://github.com/sudeepmahato16/the-wild-oasis/assets/122378993/d077282d-aaf6-4d90-8a4f-5b4bf8a9bb49"></kbd>
+  <kbd><img width="956" alt="bookings" src="https://github.com/sudeepmahato16/the-wild-oasis/assets/122378993/fa04e745-4b44-41d9-b293-53c63545ea9b"></kbd>
 
-  <kbd><img width="957" alt="single-booking" src="https://github.com/sudeepmahato16/the-wild-oasis/assets/122378993/9cb1c6cc-b792-48c4-92ce-438c083a398e"></kbd>
-
-  <kbd><img width="935" alt="update-user" src="https://github.com/sudeepmahato16/the-wild-oasis/assets/122378993/f325dffe-6fc2-4e17-a0ed-0cd0fc6d151e"></kbd>
-
-  <kbd><img width="956" alt="create-cabin" src="https://github.com/sudeepmahato16/the-wild-oasis/assets/122378993/6f27f3af-6a58-4029-b763-a03dc5544ae8"></kbd>
+  <kbd><img width="957" alt="single-booking" src="https://github.com/sudeepmahato16/the-wild-oasis/assets/122378993/33d830fd-6887-467e-b79f-cab427f33680"></kbd>
 
 
 ## Installation
