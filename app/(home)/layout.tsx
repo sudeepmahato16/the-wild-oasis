@@ -10,10 +10,10 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
-    <div className="min-h-screen grid grid-cols-[250px_1fr] grid-rows-[auto_1fr]">
+    <div className="min-h-screen grid grid-cols-[auto_1fr] grid-rows-[auto_1fr]">
       <Header />
       <Sidebar />
-      <main className=" bg-gray-50 dark:bg-gray-900 pt-8 px-10 pb-12 overflow-x-auto">
+      <main className="transition-all duration-300 ease-in-out bg-gray-50 dark:bg-gray-900 pt-8 px-10 pb-12 overflow-x-auto">
         <div className="container flex flex-col gap-6">
         {children}
           </div>
