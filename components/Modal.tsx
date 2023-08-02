@@ -9,12 +9,15 @@ import React, {
   useEffect,
 } from "react";
 import { createPortal } from "react-dom";
+import { motion, AnimatePresence } from 'framer-motion'
 import { HiXMark } from "react-icons/hi2";
+
 import useOutsideClick from "@/hooks/useOutsideClick";
+import { fadeIn, slideIn } from "@/utils/motion";
 
 const ModalContext = createContext({
-  open: (openName: string) => {},
-  close: () => {},
+  open: (openName: string) => { },
+  close: () => { },
   openName: "",
 });
 
@@ -37,24 +40,27 @@ interface WindowProps {
 const Window: React.FC<WindowProps> = ({ children, name }) => {
   const { openName, close } = useContext(ModalContext);
   const { ref } = useOutsideClick(close);
-  if (name !== openName) return null;
 
   return createPortal(
-    <div className="fixed top-0 left-0 w-full h-full bg-[rgba(0,0,0,0.3)] backdrop-blur-sm z-50 transition-all duration-500">
-      <div
-        ref={ref}
-        className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-black rounded-lg shadow-lg py-8 px-10 transition-all duration-500"
-      >
-        <button
-          type="button"
-          className="bg-none border-none py-1 rounded-md translate-x-2 transition-all duration-200 absolute top-3 right-5"
-          onClick={close}
+    <AnimatePresence>
+      {name === openName && <motion.div variants={fadeIn(0.2)} initial="hidden" animate="show" exit="hidden" className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-[rgba(0,0,0,0.3)] backdrop-blur-sm z-50 ">
+        <motion.div
+          ref={ref}
+          variants={slideIn("down", "tween", 0.2)} initial="hidden" animate="show" exit="hidden"
+          className="bg-white dark:bg-black rounded-lg shadow-lg py-8 px-10"
         >
-          <HiXMark className="w-6 h-6 stroke-gray-500 text-gray-500 dark:text-gray-400" />
-        </button>
-        {cloneElement(children, { onCloseModal: close })}
-      </div>
-    </div>,
+          <button
+            type="button"
+            className="bg-none border-none py-1 rounded-md translate-x-2 transition-all duration-200 absolute top-3 right-5"
+            onClick={close}
+          >
+            <HiXMark className="w-6 h-6 stroke-gray-500 text-gray-500 dark:text-gray-400" />
+          </button>
+          {cloneElement(children, { onCloseModal: close })}
+        </motion.div>
+      </motion.div>}
+    </AnimatePresence>
+    ,
     document.body
   );
 };
@@ -70,7 +76,7 @@ const Modal: React.FC<ModalProps> & {
   const [openName, setOpenName] = useState("");
 
   useEffect(() => {
-    const body = document.body; 
+    const body = document.body;
     if (openName) {
       const scrollTop = document.documentElement.scrollTop;
       body.style.top = `-${scrollTop}px`;
@@ -78,7 +84,7 @@ const Modal: React.FC<ModalProps> & {
     } else {
       const top = parseFloat(body.style.top) * -1
       body.classList.remove("noscroll");
-      if(top) document.documentElement.scrollTop = top;
+      if (top) document.documentElement.scrollTop = top;
     }
   }, [openName]);
 
