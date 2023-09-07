@@ -6,9 +6,10 @@ import { PAGE_SIZE } from "@/utils/config";
 
 interface PaginationProps {
   count: number;
+  isLoading?:boolean;
 }
 
-const Pagination: FC<PaginationProps> = ({ count }) => {
+const Pagination: FC<PaginationProps> = ({ count=0, isLoading }) => {
   const { getValue, addQueryToUrl } = useUrl();
   const currentPage = !getValue("page") ? 1 : Number(getValue("page"));
 
@@ -46,7 +47,7 @@ const Pagination: FC<PaginationProps> = ({ count }) => {
         <button
           className={buttonStyle}
           onClick={prevPage}
-          disabled={currentPage === 1}
+          disabled={currentPage === 1 || isLoading}
         >
           <HiChevronLeft className="h-[16px] w-[16px]" /> <span>Previous</span>
         </button>
@@ -54,7 +55,7 @@ const Pagination: FC<PaginationProps> = ({ count }) => {
         <button
           className={buttonStyle}
           onClick={nextPage}
-          disabled={currentPage === pageCount}
+          disabled={currentPage === pageCount || isLoading}
         >
           <span>Next</span>
           <HiChevronRight className="h-[16px] w-[16px]" />

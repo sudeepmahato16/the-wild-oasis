@@ -1,24 +1,21 @@
-'use client'
+"use client";
 import React from "react";
-import { useSearchParams } from 'next/navigation';
-import queryString  from 'query-string';
+import { useSearchParams } from "next/navigation";
+import queryString from "query-string";
 
 import Menu from "@/components/Menu";
 import Table from "@/components/Table";
 import Pagination from "@/components/Pagination";
 import BookingRow, { ExtendedBooking } from "./BookingRow";
-import { Loader } from "@/components/Loader";
 
 import { useBookings } from "./hooks/useBookings";
+import { usePrevious } from "@/hooks/usePrevious";
 
 const BookingTable = () => {
   const params = useSearchParams();
   const query = queryString.parse(params.toString());
   const { bookings, isLoading, count } = useBookings(query);
-
-  if (isLoading) return <Loader />
-
-  if (!bookings) return <p>No bookings could be found</p>;
+  const previousCount = usePrevious(count);
 
   return (
     <Menu>
@@ -38,12 +35,14 @@ const BookingTable = () => {
         <Table.Body
           data={bookings}
           render={(booking: ExtendedBooking) => (
-            <BookingRow key={booking.id} booking={booking } />
+            <BookingRow key={booking.id} booking={booking} />
           )}
+          isLoading={isLoading}
+          emptyMessage="No bookings could be found"
         />
 
         <Table.Footer>
-          <Pagination count={count} />
+          <Pagination count={count || previousCount || 0} isLoading={isLoading}/>
         </Table.Footer>
       </Table>
     </Menu>

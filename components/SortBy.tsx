@@ -35,7 +35,7 @@ const SortBy: React.FC<SortByProps> = ({ options }) => {
       className=" "
       classNames={{
         control: () => "dark:bg-black bg-white !border-none shadow-sm",
-        container: () => "min-w-[240px] bg-white dark:bg-black font-medium text-[13px]  rounded-md ",
+        container: () => "min-w-[240px] bg-white dark:bg-black font-medium text-[13px] z-[10]  rounded-md ",
         menu: () => "dark:bg-black bg-white dark:text-gray-300 text-gray-600",
       }}
 

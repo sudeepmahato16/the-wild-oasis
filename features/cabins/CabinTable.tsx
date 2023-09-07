@@ -6,17 +6,12 @@ import { Cabin } from "@prisma/client";
 import Table from "@/components/Table";
 import Menus from "@/components/Menu";
 import CabinRow from "./CabinRow";
-import {Loader} from '@/components/Loader'
 import { useCabins } from "./hooks/useCabins";
 
 const CabinTable = () => {
-  const { isLoading, cabins = [] } = useCabins();
+  const { isLoading, cabins } = useCabins();
   const searchParams = useSearchParams();
   const filterValue = searchParams.get("discount") || "all";
-
-  if (isLoading) return <Loader />
-
-  if (!cabins) return <p>No cabins could be found</p>;
 
   let filterCabins: Cabin[];
   if (filterValue === "all") {
@@ -33,10 +28,10 @@ const CabinTable = () => {
   const [field, direction] = sortBy.split("-");
   const modifier = direction === "asc" ? 1 : -1;
 
-  const sortedCabins = filterCabins.sort(
-    (a: any, b: any) => (a[field] - b[field]) * modifier
-  );
-
+  const sortedCabins =
+    filterCabins &&
+    filterCabins.sort((a: any, b: any) => (a[field] - b[field]) * modifier);
+    
   return (
     <Menus>
       <Table
@@ -54,6 +49,8 @@ const CabinTable = () => {
 
         <Table.Body
           data={sortedCabins}
+          isLoading={isLoading}
+          emptyMessage="No cabins could be found"
           render={(cabin: Cabin) => <CabinRow cabin={cabin} key={cabin.id} />}
         />
       </Table>
