@@ -84,7 +84,10 @@ const Modal: React.FC<ModalProps> & {
     } else {
       const top = parseFloat(body.style.top) * -1
       body.classList.remove("noscroll");
-      if (top) document.documentElement.scrollTop = top;
+      if (top) {
+        document.documentElement.scrollTop = top;
+        body.style.top = "";
+      }
     }
   }, [openName]);
 
