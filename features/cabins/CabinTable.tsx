@@ -9,7 +9,7 @@ import CabinRow from "./CabinRow";
 import { useCabins } from "./hooks/useCabins";
 
 const CabinTable = () => {
-  const { isLoading, cabins } = useCabins();
+  const { isLoading, cabins=[] } = useCabins();
   const searchParams = useSearchParams();
   const filterValue = searchParams.get("discount") || "all";
 
