@@ -7,10 +7,10 @@ import {
   ResponsiveContainer,
   Tooltip,
 } from "recharts";
-import Skeleton, {SkeletonTheme} from "react-loading-skeleton";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { Booking } from "@prisma/client";
 
-import {useDarkMode} from '@/context/DarkModeContext';
+import { useDarkMode } from "@/context/DarkModeContext";
 import { startDataDark, startDataLight } from "@/utils/constants";
 
 function prepareData(startData: any[], stays: any[]) {
@@ -40,11 +40,14 @@ function prepareData(startData: any[], stays: any[]) {
 
 interface DurationChartProps {
   confirmedStays: Booking[];
-  isLoading: boolean
+  isLoading: boolean;
 }
 
-const DurationChart: FC<DurationChartProps> = ({ confirmedStays=[], isLoading}) => {
-  const {isDarkMode} = useDarkMode();
+const DurationChart: FC<DurationChartProps> = ({
+  confirmedStays = [],
+  isLoading,
+}) => {
+  const { isDarkMode } = useDarkMode();
   const startData = isDarkMode ? startDataDark : startDataLight;
   const data = prepareData(startData, confirmedStays);
   return (
@@ -52,60 +55,64 @@ const DurationChart: FC<DurationChartProps> = ({ confirmedStays=[], isLoading}) 
       <h2 className="text-[18px] font-semibold text-gray-800 dark:text-gray-200">
         Stay duration summary
       </h2>
-      {isLoading ? <DurationChartLoader />: <ResponsiveContainer width="100%" height={240} className="text-[14px]">
-        <PieChart>
-          <Pie
-            data={data}
-            nameKey="duration"
-            dataKey="value"
-            innerRadius={75}
-            outerRadius={100}
-            cx="40%"
-            cy="50%"
-            paddingAngle={3}
-          >
-            {data.map((entry: { color: string; duration: string }) => (
-              <Cell
-                fill={entry.color}
-                stroke={entry.color}
-                key={entry.duration}
-              />
-            ))}
-          </Pie>
-          <Tooltip />
-          <Legend
-            verticalAlign="middle"
-            align="right"
-            widths="30%"
-            layout="vertical"
-            iconSize={15}
-            iconType="circle"
-          />
-        </PieChart>
-      </ResponsiveContainer>}
+      {isLoading ? (
+        <DurationChartLoader />
+      ) : (
+        <ResponsiveContainer width="100%" height={240} className="text-[14px]">
+          <PieChart>
+            <Pie
+              data={data}
+              nameKey="duration"
+              dataKey="value"
+              innerRadius={75}
+              outerRadius={100}
+              cx="40%"
+              cy="50%"
+              paddingAngle={3}
+            >
+              {data.map((entry: { color: string; duration: string }) => (
+                <Cell
+                  fill={entry.color}
+                  stroke={entry.color}
+                  key={entry.duration}
+                />
+              ))}
+            </Pie>
+            <Tooltip />
+            <Legend
+              verticalAlign="middle"
+              align="right"
+              widths="30%"
+              layout="vertical"
+              iconSize={15}
+              iconType="circle"
+            />
+          </PieChart>
+        </ResponsiveContainer>
+      )}
     </div>
   );
 };
 
 export default DurationChart;
 
-
 const DurationChartLoader = () => {
-  const {isDarkMode} = useDarkMode();
-  return  <SkeletonTheme
-  baseColor={!isDarkMode ? "#efefef" : "#111827"}
-  highlightColor={!isDarkMode ? "#f3f4f6" : "#1f2937"}
->
-  <div className="flex items-center justify-between">
-  <Skeleton height="200px" width="200px" className="!rounded-full"/>
+  const { isDarkMode } = useDarkMode();
+  return (
+    <SkeletonTheme
+      baseColor={!isDarkMode ? "#efefef" : "#111827"}
+      highlightColor={!isDarkMode ? "#f3f4f6" : "#1f2937"}
+    >
+      <div className="flex items-center justify-between">
+        <Skeleton height="200px" width="200px" className="!rounded-full mt-4" />
 
-  <div className="flex flex-col gap-1 ">
-  <Skeleton height="18px" width="108px" />
-  <Skeleton height="18px" width="108px"/>
-  <Skeleton height="18px" width="108px"/>
-  <Skeleton height="18px" width="108px"/>
-    </div>
-    </div>
-  
-  </SkeletonTheme>
-}
+        <div className="flex flex-col gap-1 ">
+          <Skeleton height="18px" width="108px" />
+          <Skeleton height="18px" width="108px" />
+          <Skeleton height="18px" width="108px" />
+          <Skeleton height="18px" width="108px" />
+        </div>
+      </div>
+    </SkeletonTheme>
+  );
+};

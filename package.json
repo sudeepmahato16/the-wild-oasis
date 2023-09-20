@@ -29,7 +29,7 @@
     "react-icons": "^4.10.1",
     "react-loading-skeleton": "^3.3.1",
     "react-select": "^5.7.4",
-    "recharts": "^2.7.2",
+    "recharts": "^2.8.0",
     "server-only": "^0.0.1",
     "uuid": "^9.0.0"
   },
