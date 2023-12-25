@@ -1,7 +1,10 @@
 "use client";
 import React, { createContext, useContext, ReactNode } from "react";
+import {motion} from 'framer-motion'
+
 import { Loader } from "@/components/Loader";
 import { usePrevious } from "@/hooks/usePrevious";
+import {fadeIn} from '@/utils/motion'
 
 interface TableProps {
   columns: string;
@@ -75,7 +78,8 @@ const Row = ({ children }: { children: ReactNode }) => {
   const { columns } = useContext(TableContext);
 
   return (
-    <div
+    <motion.div
+    variants={fadeIn(0.3, 0.4)} animate="show" initial="hidden"
       style={{
         gridTemplateColumns: columns,
       }}
@@ -83,7 +87,7 @@ const Row = ({ children }: { children: ReactNode }) => {
       role="row"
     >
       {children}
-    </div>
+    </motion.div>
   );
 };
 

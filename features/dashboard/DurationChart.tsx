@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import {motion} from 'framer-motion'
 import {
   Cell,
   Legend,
@@ -12,6 +13,7 @@ import { Booking } from "@prisma/client";
 
 import { useDarkMode } from "@/context/DarkModeContext";
 import { startDataDark, startDataLight } from "@/utils/constants";
+import {fadeIn} from '@/utils/motion'
 
 function prepareData(startData: any[], stays: any[]) {
   function incArrayValue(arr: any[], field: string) {
@@ -51,13 +53,15 @@ const DurationChart: FC<DurationChartProps> = ({
   const startData = isDarkMode ? startDataDark : startDataLight;
   const data = prepareData(startData, confirmedStays);
   return (
-    <div className="col-start-3 col-span-2 bg-white dark:bg-black border border-gray-100 dark:border-gray-800 py-6 px-8 first:mb-4 rounded-lg">
+    <div className="col-start-3 col-span-2 bg-white dark:bg-black border border-gray-100 dark:border-gray-800 py-6 px-8 first:mb-4 rounded-lg h-[316px]">
       <h2 className="text-[18px] font-semibold text-gray-800 dark:text-gray-200">
         Stay duration summary
       </h2>
       {isLoading ? (
         <DurationChartLoader />
       ) : (
+        <motion.div variants={fadeIn(0.8, 0.4)} animate="show" initial="hidden">
+
         <ResponsiveContainer width="100%" height={240} className="text-[14px]">
           <PieChart>
             <Pie
@@ -69,7 +73,7 @@ const DurationChart: FC<DurationChartProps> = ({
               cx="40%"
               cy="50%"
               paddingAngle={3}
-            >
+              >
               {data.map((entry: { color: string; duration: string }) => (
                 <Cell
                   fill={entry.color}
@@ -86,9 +90,10 @@ const DurationChart: FC<DurationChartProps> = ({
               layout="vertical"
               iconSize={15}
               iconType="circle"
-            />
+              />
           </PieChart>
         </ResponsiveContainer>
+      </motion.div>
       )}
     </div>
   );
@@ -103,7 +108,7 @@ const DurationChartLoader = () => {
       baseColor={!isDarkMode ? "#efefef" : "#111827"}
       highlightColor={!isDarkMode ? "#f3f4f6" : "#1f2937"}
     >
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between ">
         <Skeleton height="200px" width="200px" className="!rounded-full mt-4" />
 
         <div className="flex flex-col gap-1 ">

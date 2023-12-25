@@ -22,15 +22,15 @@ export const slideIn = (
   },
 });
 
-export const fadeIn = (duration: number) => ({
+export const fadeIn = (duration: number, initialOpacity = 0) => ({
   hidden: {
-    opacity: 0,
+    opacity: initialOpacity,
   },
   show: {
     opacity: 1,
     transition: {
       duration,
-      ease: "easeInOut",
+      ease: "easeIn",
       type: "tween",
     },
   },

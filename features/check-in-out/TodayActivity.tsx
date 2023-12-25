@@ -1,10 +1,12 @@
 "use client";
 import React from "react";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import {motion} from 'framer-motion'
 
 import TodayItem from "./TodayItem";
 import { useTodayActivity } from "./hooks/useTodayActivity";
 import { useDarkMode } from "@/context/DarkModeContext";
+import {fadeIn} from '@/utils/motion'
 
 const TodayActivity = () => {
   const { activities, isLoading } = useTodayActivity();
@@ -20,17 +22,17 @@ const TodayActivity = () => {
 
       {!isLoading ? (
         activities?.length > 0 ? (
-          <ul className="overflow-scroll overflow-x-hidden [&::-webkit-scrollbar]:!w-0 ">
+          <motion.ul variants={fadeIn(0.6, 0.4)} animate="show" initial="hidden" className="overflow-scroll overflow-x-hidden [&::-webkit-scrollbar]:!w-0 ">
             {activities.map((activity: any) => (
               <TodayItem activity={activity} key={activity.id} />
             ))}
-          </ul>
+          </motion.ul>
         ) : (
-          <div className="flex h-full w-full justify-center items-center">
+          <motion.div variants={fadeIn(0.6, 0.4)} animate="show" initial="hidden"  className="flex h-full w-full justify-center items-center">
             <p className="text-center text-[16px] font-medium mb-3 dark:text-gray-400">
               No activity today...
             </p>
-          </div>
+          </motion.div>
         )
       ) : (
         <SkeletonTheme
