@@ -1,6 +1,10 @@
 import { useEffect, useRef } from "react";
 
-const useOutsideClick = (action: () => void, listenCapturing = true) => {
+const useOutsideClick = (
+  action: () => void,
+  listenCapturing = true,
+  startListening = true,
+) => {
   const ref = useRef<any>(null);
 
   useEffect(() => {
@@ -10,12 +14,16 @@ const useOutsideClick = (action: () => void, listenCapturing = true) => {
       }
     };
 
-    document.addEventListener("click", handleClick, listenCapturing);
+    if (startListening) {
+      document.addEventListener("click", handleClick, listenCapturing);
+    } else {
+      document.removeEventListener("click", handleClick, listenCapturing);
+    }
 
     return () => {
       document.removeEventListener("click", handleClick, listenCapturing);
     };
-  }, [action, listenCapturing]);
+  }, [action, listenCapturing, startListening]);
 
   return { ref };
 };

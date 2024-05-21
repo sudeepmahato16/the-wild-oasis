@@ -1,8 +1,9 @@
 "use client";
-import React, { FC, createContext, useContext, useState } from "react";
+import React, { FC, createContext, useCallback, useContext, useState } from "react";
 import { HiEllipsisVertical } from "react-icons/hi2";
 import { IconType } from "react-icons/lib";
 import useOutsideClick from "@/hooks/useOutsideClick";
+import { useKeyPress } from "@/hooks/useOnKeyPress";
 
 interface MenusProps {
   children: React.ReactNode;
@@ -66,7 +67,8 @@ const Button: FC<ButtonProps> = ({
 
 const List = ({ id, children }: { id: string; children: React.ReactNode }) => {
   const { openId, close, offsetTop } = useContext(MenuContext);
-  const { ref } = useOutsideClick(close, false);
+  const { ref } = useOutsideClick(close, false, openId===id);
+  useKeyPress("Escape", close, openId===id);
 
   if (openId !== id) return null;
 
@@ -96,7 +98,7 @@ const Menu: FC<MenusProps> & {
   const [openId, setOpenId] = useState("");
   const [offsetTop, setOffsetTop] = useState(0);
 
-  const close = () => setOpenId("");
+  const close = useCallback(() => setOpenId(""), []);
   const open = setOpenId;
 
   return (

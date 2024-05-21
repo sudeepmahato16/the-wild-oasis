@@ -7,12 +7,15 @@ import React, {
   createContext,
   ReactElement,
   useEffect,
+  useCallback,
+  memo,
 } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from 'framer-motion'
 import { HiXMark } from "react-icons/hi2";
 
 import useOutsideClick from "@/hooks/useOutsideClick";
+import { useKeyPress } from "@/hooks/useOnKeyPress";
 import { fadeIn, slideIn } from "@/utils/motion";
 
 const ModalContext = createContext({
@@ -39,7 +42,9 @@ interface WindowProps {
 
 const Window: React.FC<WindowProps> = ({ children, name }) => {
   const { openName, close } = useContext(ModalContext);
-  const { ref } = useOutsideClick(close);
+  const { ref } = useOutsideClick(close, true, name === openName);
+
+  useKeyPress("Escape", close, name === openName)
 
   return createPortal(
     <AnimatePresence>
@@ -91,9 +96,9 @@ const Modal: React.FC<ModalProps> & {
     }
   }, [openName]);
 
-  const close = () => {
+  const close = useCallback(() => {
     setOpenName("");
-  };
+  }, []);
 
   const open = setOpenName;
 
@@ -105,6 +110,6 @@ const Modal: React.FC<ModalProps> & {
 };
 
 Modal.Open = Open;
-Modal.Window = Window;
+Modal.Window = memo(Window);
 
 export default Modal;
