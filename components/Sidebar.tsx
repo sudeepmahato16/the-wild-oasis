@@ -3,7 +3,7 @@ import React from "react";
 import Logo from "./Logo";
 import MainNav from "./MainNav";
 import { useGlobalContext } from "@/context/GlobalContext";
-import Uploader from "@/data/Uploader";
+// import Uploader from "@/data/Uploader";
 
 const Sidebar = () => {
   const { isSidebarOpen } = useGlobalContext();
@@ -15,7 +15,7 @@ const Sidebar = () => {
     >
       <Logo />
       <MainNav />
-      <Uploader />
+      {/* <Uploader /> */}
     </aside>
   );
 };
