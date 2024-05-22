@@ -71,7 +71,7 @@ model Booking {
   observations String
 
   cabinId String @db.ObjectId
-  cabin   Cabin  @relation(fields: [cabinId], references: [id])
+  cabin   Cabin  @relation(fields: [cabinId], references: [id], onDelete: Cascade)
 
   guestId String @db.ObjectId
   guest   Guest  @relation(fields: [guestId], references: [id])

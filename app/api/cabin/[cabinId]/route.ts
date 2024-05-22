@@ -18,6 +18,7 @@ export const DELETE = async (
 
     return new Response(JSON.stringify(cabin));
   } catch (error) {
+    console.log(error)
     return new Response("Unable to delete cabin", { status: 500 });
   }
 };
