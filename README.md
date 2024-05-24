@@ -1,5 +1,6 @@
 <div align="center">
-
+  <br/>
+  <br/>
   <img src="/public/logo-dark.png#gh-dark-mode-only" alt="logo" width="200" height="auto" />
   <img src="/public/logo-light.png#gh-light-mode-only" alt="logo" width="200" height="auto" />
   <br/>
@@ -140,73 +141,23 @@
   NEXT_PUBLIC_CLOUDINARY_KEY=<your-cloudinary-cloud-name>
   ```
 
+- Seed the database
+  
+   ```
+   npm run db:seed
+   ```
+
 <br/>
 
 ## Usage
 
-- In the middleware.ts file, make sure to comment out all the routes as shown below:
-
-  ```
-  export { default } from "next-auth/middleware"
-
-  export const config = {
-   matcher: [
-       // "/dashboard",
-       // "/cabins",
-       // "/settings",
-       // "/bookings",
-       // "/users",
-       // "/accounts"
-   ]
-  }
-  ```
-
-- To upload sample data, kindly remove the comments from the Uploader component within the Sidebar component, as depicted here:
-
-  ```
-  "use client";
-  import React from "react";
-  import Logo from "./Logo";
-  import MainNav from "./MainNav";
-  import { useGlobalContext } from "@/context/GlobalContext";
-  import Uploader from "@/data/Uploader";
-
-  const Sidebar = () => {
-  const { isSidebarOpen } = useGlobalContext();
-  return (
-
-  <aside
-  className={`row-span-full w-[250px] ${
-        isSidebarOpen ? "-ml-[250px] " : "m-0 "
-      } bg-white dark:bg-black py-8 px-6 border-r dark:border-gray-900 transition-all duration-300 ease-in-out border-gray-100 flex flex-col gap-8 `} >
-  <Logo />
-  <MainNav />
-  <Uploader />
-  </aside>
-  );
-  };
-  
-   export default Sidebar;
-
-   ```
-
 - Start the development server:
 
    ```
-   
    npm run dev
-   
    ```
 
 - Open your browser and visit `http://localhost:3000` to access the application.
-
-- Click on the Upload All button in the sidebar to upload sample data.
-
-- Click on Users in the sidebar and create a new user.
-
-- Once completed, uncomment all the routes in the middleware.ts file and restart the development server.
-
-- Finally, log in with the newly created user account.
 
 <br/>
 
