@@ -1,6 +1,6 @@
 import { Poppins } from "next/font/google";
 
-import Provider from "@/providers/Provider";
+import Providers from "@/components/Providers";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={poppins.className}>
-        <Provider>{children}</Provider>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
