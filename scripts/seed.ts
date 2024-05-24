@@ -1,9 +1,11 @@
 import { isFuture, isPast, isToday } from "date-fns";
+import bcrypt from "bcrypt";
+import { PrismaClient } from "@prisma/client";
+
 import { cabins } from "@/data/data-cabins";
 import { guests } from "@/data/data-guests";
 import { bookings } from "@/data/data-bookings";
 import { subtractDates } from "@/utils/helpers";
-import { PrismaClient } from "@prisma/client";
 
 const db = new PrismaClient();
 
@@ -14,6 +16,29 @@ const main = async () => {
     await db.booking.deleteMany();
     await db.guest.deleteMany();
     await db.cabin.deleteMany();
+    await db.user.deleteMany();
+    await db.settings.deleteMany();
+
+    const password = await bcrypt.hash("supersecretpassword", 10);
+
+    await db.user.create({
+      data: {
+        email: "demo@gmail.com",
+        name: "Tomioka Giyu",
+        password,
+        image:
+          "https://res.cloudinary.com/dzxjgqfli/image/upload/v1716392046/the-wild-oasis/ofsem0mvmyuflnqmbvv3.jpg",
+      },
+    });
+
+    await db.settings.create({
+      data: {
+        minBookingLength: 6,
+        maxBookingLength: 30,
+        maxGuestsPerBooking: 8,
+        breakfastPrice: 10,
+      },
+    });
 
     await db.guest.createMany({
       data: guests,
