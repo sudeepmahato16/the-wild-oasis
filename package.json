@@ -15,7 +15,7 @@
     "@prisma/client": "^4.16.2",
     "@tanstack/react-query": "^4.29.19",
     "@tanstack/react-query-devtools": "^4.29.19",
-    "axios": "^1.6.0",
+    "axios": "^1.7.4",
     "bcrypt": "^5.1.0",
     "date-fns": "^2.30.0",
     "framer-motion": "^10.15.0",
