@@ -7,7 +7,7 @@ interface AvatarProps {
 }
 
 const Avatar: React.FC<AvatarProps> = ({ image, name }) => {
-  const imgSrc = !!image ?  "/default-user.jpg" : image;
+  const imgSrc = !!image ? image: "/default-user.jpg";
 
   return (
     <div className="flex gap-[10px] items-center font-medium text-[14px] text-gray-600 duration-200 dark:text-gray-300">
@@ -17,6 +17,7 @@ const Avatar: React.FC<AvatarProps> = ({ image, name }) => {
         alt={name || "user-image"}
         fill
         className="rounded-full outline-2 outline-gray-100 dark:outline-gray-800 object-cover object-center"
+        sizes="28px"
         />
         </div>
       <span>{name}</span>
